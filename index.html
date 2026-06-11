@@ -155,8 +155,16 @@
             color: var(--text-secondary); 
             font-size: 1rem; 
             line-height: 1.8; 
-            margin-bottom: auto;
+            margin-bottom: 1.5rem;
             white-space: pre-line; 
+        }
+
+        /* NEW: Book Action Links (Amazon/Goodreads) */
+        .book-action-links {
+            display: flex; gap: 0.75rem; margin-top: auto; flex-wrap: wrap;
+        }
+        .book-action-links a {
+            flex: 1; text-align: center; text-decoration: none; min-width: 100px;
         }
 
         .form-section {
@@ -204,7 +212,7 @@
         }
         .admin-header h2 { font-family: var(--font-heading); font-size: 1.8rem; letter-spacing: 2px; text-transform: uppercase; }
         
-        .admin-tabs { display: flex; gap: 1rem; margin-bottom: 3rem; }
+        .admin-tabs { display: flex; gap: 1rem; margin-bottom: 3rem; flex-wrap: wrap; }
         .admin-tab {
             padding: 0.75rem 2rem; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border);
             color: var(--text-secondary); cursor: pointer; font-family: var(--font-heading);
@@ -234,7 +242,7 @@
         .btn-small {
             padding: 0.6rem 0.8rem; font-size: 0.7rem; cursor: pointer; border: none;
             font-family: var(--font-heading); text-transform: uppercase; letter-spacing: 1px;
-            transition: all 0.2s; border-radius: 3px;
+            transition: all 0.2s; border-radius: 3px; text-decoration: none; display: inline-block; text-align: center;
         }
         .btn-edit { background: var(--accent-1); color: #050202; font-weight: 600; }
         .btn-edit:hover { background: #ef4444; }
@@ -247,13 +255,8 @@
         .btn-add:hover { background: var(--accent-1); color: #050202; }
         
         .btn-move { 
-            background: #333333; 
-            color: #ffffff; 
-            border: 1px solid #555555; 
-            font-size: 1.2rem; 
-            padding: 0.4rem 1rem; 
-            font-weight: bold;
-            line-height: 1;
+            background: #333333; color: #ffffff; border: 1px solid #555555; 
+            font-size: 1.2rem; padding: 0.4rem 1rem; font-weight: bold; line-height: 1;
         }
         .btn-move:hover:not(:disabled) { background: #444444; border-color: #777777; }
         .btn-move:disabled { opacity: 0.3; cursor: not-allowed; background: #222222; }
@@ -291,6 +294,16 @@
             color: var(--text-secondary); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase;
             font-family: var(--font-heading); font-weight: 400;
         }
+        
+        /* NEW: Footer Social Links */
+        .footer-socials {
+            display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem;
+        }
+        .footer-socials a {
+            color: var(--text-secondary); text-decoration: none; transition: color 0.3s;
+            font-size: 0.9rem; letter-spacing: 2px;
+        }
+        .footer-socials a:hover { color: var(--accent-1); }
 
         @media (max-width: 768px) {
             .mobile-menu-btn { display: block; }
@@ -356,7 +369,7 @@
             <h2 class="section-title">Get In <span class="gradient-text">Touch</span></h2>
             <div class="form-section">
                 <form action="https://api.web3forms.com/submit" method="POST">
-                    <input type="hidden" name="access_key" value="199893c8-b1b4-464e-8a6a-4c30dca92931">
+                    <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY">
                     <input type="hidden" name="subject" value="New Contact Form Submission - Robert Chester Website">
                     <input type="checkbox" name="botcheck" style="display: none;">
                     <div class="form-group"><label for="contact-name">Name</label><input type="text" id="contact-name" name="name" required placeholder="Your name"></div>
@@ -366,7 +379,7 @@
                 </form>
                 <div class="form-divider"></div>
                 <form action="https://api.web3forms.com/submit" method="POST">
-                    <input type="hidden" name="access_key" value="10273041-54af-48f6-a152-3560099fc314">
+                    <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY">
                     <input type="hidden" name="subject" value="New Mailing List Subscription - Robert Chester Website">
                     <input type="checkbox" name="botcheck" style="display: none;">
                     <div class="form-group"><label for="mailing-name">Name</label><input type="text" id="mailing-name" name="name" required placeholder="Your name"></div>
@@ -390,6 +403,7 @@
             <div class="admin-tabs">
                 <button class="admin-tab active" onclick="switchAdminTab('books')">Manage Books</button>
                 <button class="admin-tab" onclick="switchAdminTab('dossiers')">Manage Dossiers</button>
+                <button class="admin-tab" onclick="switchAdminTab('socials')">Site Settings</button>
                 <button class="admin-tab" onclick="switchAdminTab('export')">Export Data</button>
             </div>
 
@@ -403,6 +417,20 @@
                 <div id="admin-dossiers-list"></div>
             </div>
 
+            <!-- NEW: Site Settings Panel -->
+            <div id="admin-socials-panel" style="display: none;">
+                <h3 style="color: var(--text-primary); margin-bottom: 1.5rem; font-family: var(--font-heading); text-transform: uppercase; letter-spacing: 2px;">Social Media Links</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 2rem; font-size: 0.9rem;">Leave a field blank to hide that icon from the footer.</p>
+                <form onsubmit="saveSocials(event)">
+                    <div class="form-row">
+                        <div class="form-group"><label>Facebook URL</label><input type="text" id="social-facebook" placeholder="https://facebook.com/..."></div>
+                        <div class="form-group"><label>X (Twitter) URL</label><input type="text" id="social-x" placeholder="https://x.com/..."></div>
+                    </div>
+                    <div class="form-group"><label>Instagram URL</label><input type="text" id="social-instagram" placeholder="https://instagram.com/..."></div>
+                    <button type="submit" class="btn btn-small btn-edit" style="padding: 0.8rem 1.5rem;">Save Social Links</button>
+                </form>
+            </div>
+
             <div id="admin-export-panel" style="display: none;">
                 <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.9rem;">Copy the code below and paste it into the <strong>DATA SECTION</strong> marked with comments in your HTML file.</p>
                 <button class="btn btn-small btn-add" onclick="generateExportCode()">Generate Export Code</button>
@@ -412,7 +440,13 @@
         </div>
     </section>
 
-    <footer><div class="container"><p>&copy; 2026 Robert Chester. All Rights Reserved.</p></div></footer>
+    <footer>
+        <div class="container">
+            <!-- NEW: Dynamic Social Links -->
+            <div id="footer-socials" class="footer-socials"></div>
+            <p>&copy; 2026 Robert Chester. All Rights Reserved.</p>
+        </div>
+    </footer>
 
     <div id="book-modal" class="modal">
         <div class="modal-content">
@@ -430,6 +464,13 @@
                 </div>
                 <div class="form-group"><label>Meta</label><input type="text" id="book-meta" required></div>
                 <div class="form-group"><label>Synopsis</label><textarea id="book-synopsis" rows="4" required></textarea></div>
+                
+                <!-- NEW: Book Links -->
+                <div class="form-row">
+                    <div class="form-group"><label>Amazon URL (Optional)</label><input type="text" id="book-amazon" placeholder="https://amazon.com/..."></div>
+                    <div class="form-group"><label>Goodreads URL (Optional)</label><input type="text" id="book-goodreads" placeholder="https://goodreads.com/..."></div>
+                </div>
+
                 <div class="form-group"><label>Cover Image</label><input type="file" id="book-image" accept="image/*" onchange="previewImage(this, 'book-preview')"><div class="image-preview" id="book-preview"><span style="color: #666;">No image selected</span></div></div>
                 <div style="display: flex; gap: 1rem; margin-top: 1rem;">
                     <button type="submit" class="btn btn-small btn-edit" style="flex: 1; padding: 0.8rem;">Save Book</button>
@@ -460,11 +501,7 @@
         // ============================================
         // SECURE URL CONFIGURATION (HASHED)
         // ============================================
-        // Paste the long string you generated in the Console below:
-
-
-
-    const SECRET_HASH = '7e54c1decffb96bac7476f995ca33e6ac21ceee0e002d7afbf5f1c8f62250c69'
+        const SECRET_HASH = '7e54c1decffb96bac7476f995ca33e6ac21ceee0e002d7afbf5f1c8f62250c69'; // Example placeholder, ensure you use your real 64-char hash
 
         async function verifyKey(key) {
             if (!key) return false;
@@ -476,81 +513,32 @@
             return inputHash === SECRET_HASH;
         }
 
+        // ============================================
+        // DATA SECTION - PASTE EXPORTED DATA HERE
+        // ============================================
+        const defaultBooks = [
+            { "title": "Blood Relatives", "category": "An Inspector Griffin Mystery", "meta": "Inspector Griffin Mystery", "coverUrl": "Blood Relatives.jpg", "synopsis": "Adam Griffin meets Finn Williams...", "amazonUrl": "", "goodreadsUrl": "", "isVisible": true },
+            { "title": "The Crypto Mystery Weekend", "category": "An Inspector Griffin Mystery", "meta": "Inspector Griffin Mystery", "coverUrl": "A Crypto Mystery Weekend3.jpg", "synopsis": "A murder at a luxury estate...", "amazonUrl": "", "goodreadsUrl": "", "isVisible": true },
+            { "title": "The Silent Observer", "category": "Other Works", "meta": "Psychological Thriller", "coverUrl": "silent.jpg", "synopsis": "A standalone thriller about a witness who saw too much.", "amazonUrl": "", "goodreadsUrl": "", "isVisible": true }
+        ];
+        const defaultCharacters = [
+            { "name": "Adam Griffin", "role": "The Analytical Investigator", "bio": "Managing his grandmother's estate...", "coverUrl": "", "isVisible": true }
+        ];
+        const defaultSocials = {
+            facebook: "",
+            x: "",
+            instagram: ""
+        };
+        // ============================================
+        // END OF DATA SECTION
+        // ============================================
 
-
-
-
-// ============================================
-// PASTE THIS CODE IN THE DATA SECTION
-// ============================================
-
-const defaultBooks = [
-    {
-        "title": "Blood Relatives",
-        "category": "An Inspector Griffin Mystery",
-        "meta": "Inspector Griffin Mystery",
-        "synopsis": "A near-miss with a speeding van at Waterloo Station is just the opening move in a deadly new game for Adam Griffin. Reunited with his old school friend, Finn Williams—now an elite white-hat hacker—Adam thinks his biggest challenge is navigating a sudden romance and managing his grandmother's massive literary estate.\n\nBut when a high-profile stabbing at the London School of Economics strikes a terrifyingly familiar chord, the investigation takes a deeply personal turn. Hidden behind a web of cyber-scams, stolen identities, and black-market weapons is a ghost from Adam's past: a woman he had never met, driven by a lifetime of bitter envy and a desperate hunger for his fortune.\n\nIn this 21st-century mystery, Adam and Finn must use every ounce of financial logic and hacking prowess to track a killer who is rapidly unravelling—before her final, desperate strike hits home.",
-        "coverUrl": "Blood Relatives.jpg",
-        "isVisible": true
-    },
-    {
-        "title": "The Crypto Mystery Weekend",
-        "category": "An Inspector Griffin Mystery",
-        "meta": "Inspector Griffin Mystery",
-        "synopsis": "An exclusive Murder Mystery weekend at a luxury Oxfordshire estate turns deadly when a real body is found bludgeoned in the garden.\n\nFor independently wealthy Adam Griffin and his partner Finn, a top-tier ethical hacker, the investigation quickly morphs from a cozy whodunit into a high-stakes cyber chase.\n\nAt the centre of it all? A fastidiously arrogant guest, a manipulative psychic medium and a hidden USB drive holding a secret. A secret worth killing for.\n\nTo catch a killer who has played everyone for a fool, they must follow the money—before the digital trail goes cold forever.",
-        "coverUrl": "A Crypto Mystery Weekend3.jpg",
-        "isVisible": true
-    },
-    {
-        "category": "Other Works",
-        "isVisible": false,
-        "title": "The Silent Observer",
-        "meta": "Psychological Thriller",
-        "coverUrl": "silent.jpg",
-        "synopsis": "A standalone thriller about a witness who saw too much."
-    },
-    {
-        "title": "The Choirboy Killer",
-        "category": "An Inspector Griffin Mystery",
-        "meta": "An Inspector Griffin Mystery",
-        "synopsis": "Coming Soon\n\nA killer stalks Soho.  Can Adam and Finn find the murderer before he strikes again?",
-        "coverUrl": "the choirboy killer.jpg",
-        "isVisible": true
-    }
-];
-
-const defaultCharacters = [
-    {
-        "name": "Adam Griffin",
-        "role": "The wealthy grandson of one of the world's greatest mystery writers.",
-        "bio": "When Adam met Finn Williams they found themselves embroiled in mystery and intrigue",
-        "coverUrl": "Adam.jpg",
-        "isVisible": true
-    },
-    {
-        "name": "Finn Williams",
-        "role": "Master Hacker",
-        "bio": "Recruited to MI5 as a teenager, Finn Williams is one of the top five computer hackers in the world.  After leaving the intelligence services he became a white-hat hacker committed to protecting computer systems around the world.\n\nWhen he met Adam Griffin their mutual attraction and instant connection made a strong bond.",
-        "coverUrl": "Finn.jpg",
-        "isVisible": true
-    }
-];
-
-// ============================================
-// END OF EXPORTED DATA
-// ============================================
-
-
-
-
-
-
-
-        let books = [], characters = [], isAdmin = false;
+        let books = [], characters = [], socials = {}, isAdmin = false;
 
         document.addEventListener('DOMContentLoaded', async () => {
             loadData();
             renderPublic();
+            renderFooter();
             
             const urlParams = new URLSearchParams(window.location.search);
             const urlKey = urlParams.get('key');
@@ -567,25 +555,32 @@ const defaultCharacters = [
         function loadData() {
             let storedBooks = localStorage.getItem('rc_books');
             let storedChars = localStorage.getItem('rc_characters');
+            let storedSocials = localStorage.getItem('rc_socials');
             
             books = storedBooks ? JSON.parse(storedBooks) : JSON.parse(JSON.stringify(defaultBooks));
             characters = storedChars ? JSON.parse(storedChars) : JSON.parse(JSON.stringify(defaultCharacters));
+            socials = storedSocials ? JSON.parse(storedSocials) : JSON.parse(JSON.stringify(defaultSocials));
             
-            books = books.map(b => ({ category: "An Inspector Griffin Mystery", isVisible: true, ...b }));
+            // Migration for older data missing new fields
+            books = books.map(b => ({ category: "An Inspector Griffin Mystery", isVisible: true, amazonUrl: "", goodreadsUrl: "", ...b }));
             characters = characters.map(c => ({ isVisible: true, ...c }));
+            if(!socials.facebook) socials = { ...defaultSocials, ...socials };
         }
 
         function saveData() {
             localStorage.setItem('rc_books', JSON.stringify(books));
             localStorage.setItem('rc_characters', JSON.stringify(characters));
+            localStorage.setItem('rc_socials', JSON.stringify(socials));
             renderPublic();
+            renderFooter();
             if (isAdmin) renderAdminLists();
         }
 
         function resetData() {
-            if(confirm("This will clear all custom data and restore the default books and characters. Continue?")) {
+            if(confirm("This will clear all custom data and restore the default books, characters, and social links. Continue?")) {
                 localStorage.removeItem('rc_books');
                 localStorage.removeItem('rc_characters');
+                localStorage.removeItem('rc_socials');
                 location.reload();
             }
         }
@@ -594,12 +589,22 @@ const defaultCharacters = [
             const griffinBooks = books.filter(b => b.isVisible && b.category === "An Inspector Griffin Mystery");
             const otherBooks = books.filter(b => b.isVisible && b.category === "Other Works");
 
-            document.getElementById('books-griffin').innerHTML = griffinBooks.map(b => `
+            const createBookCard = (b) => `
                 <div class="book-card">
                     <div class="book-cover"><img src="${b.coverUrl}" onerror="this.style.display='none'"></div>
-                    <div class="card-content"><h3>${b.title}</h3><p class="meta">${b.meta}</p><p class="synopsis">${b.synopsis}</p></div>
+                    <div class="card-content">
+                        <h3>${b.title}</h3>
+                        <p class="meta">${b.meta}</p>
+                        <p class="synopsis">${b.synopsis}</p>
+                        <div class="book-action-links">
+                            ${b.amazonUrl ? `<a href="${b.amazonUrl}" target="_blank" class="btn-small btn-edit">Buy on Amazon</a>` : ''}
+                            ${b.goodreadsUrl ? `<a href="${b.goodreadsUrl}" target="_blank" class="btn-small btn-toggle">Goodreads</a>` : ''}
+                        </div>
+                    </div>
                 </div>
-            `).join('') || '<p style="color:var(--text-secondary); font-style:italic;">No books in this category yet.</p>';
+            `;
+
+            document.getElementById('books-griffin').innerHTML = griffinBooks.map(createBookCard).join('') || '<p style="color:var(--text-secondary); font-style:italic;">No books in this category yet.</p>';
 
             const otherBooksContainer = document.getElementById('books-other');
             const otherBooksHeader = document.getElementById('other-works-header');
@@ -610,12 +615,7 @@ const defaultCharacters = [
             } else {
                 otherBooksContainer.style.display = 'grid';
                 otherBooksHeader.style.display = 'flex';
-                otherBooksContainer.innerHTML = otherBooks.map(b => `
-                    <div class="book-card">
-                        <div class="book-cover"><img src="${b.coverUrl}" onerror="this.style.display='none'"></div>
-                        <div class="card-content"><h3>${b.title}</h3><p class="meta">${b.meta}</p><p class="synopsis">${b.synopsis}</p></div>
-                    </div>
-                `).join('');
+                otherBooksContainer.innerHTML = otherBooks.map(createBookCard).join('');
             }
 
             document.getElementById('dossiers-container').innerHTML = characters.filter(c => c.isVisible).map(c => `
@@ -624,6 +624,15 @@ const defaultCharacters = [
                     <div class="card-content"><h3>${c.name}</h3><p class="meta">${c.role}</p><p class="synopsis">${c.bio}</p></div>
                 </div>
             `).join('');
+        }
+
+        function renderFooter() {
+            const container = document.getElementById('footer-socials');
+            let html = '';
+            if (socials.facebook) html += `<a href="${socials.facebook}" target="_blank">Facebook</a>`;
+            if (socials.x) html += `<a href="${socials.x}" target="_blank">X</a>`;
+            if (socials.instagram) html += `<a href="${socials.instagram}" target="_blank">Instagram</a>`;
+            container.innerHTML = html;
         }
 
         function enableAdminMode() {
@@ -644,6 +653,22 @@ const defaultCharacters = [
             };
             
             renderAdminLists();
+            loadSocialsForm();
+        }
+
+        function loadSocialsForm() {
+            document.getElementById('social-facebook').value = socials.facebook || '';
+            document.getElementById('social-x').value = socials.x || '';
+            document.getElementById('social-instagram').value = socials.instagram || '';
+        }
+
+        function saveSocials(e) {
+            e.preventDefault();
+            socials.facebook = document.getElementById('social-facebook').value.trim();
+            socials.x = document.getElementById('social-x').value.trim();
+            socials.instagram = document.getElementById('social-instagram').value.trim();
+            saveData();
+            alert('Social links saved!');
         }
 
         function logout() { 
@@ -654,7 +679,7 @@ const defaultCharacters = [
         function switchAdminTab(tab) {
             document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
             event.target.classList.add('active');
-            ['books', 'dossiers', 'export'].forEach(p => document.getElementById(`admin-${p}-panel`).style.display = 'none');
+            ['books', 'dossiers', 'socials', 'export'].forEach(p => document.getElementById(`admin-${p}-panel`).style.display = 'none');
             document.getElementById(`admin-${tab}-panel`).style.display = 'block';
         }
 
@@ -713,12 +738,16 @@ const defaultCharacters = [
                 document.getElementById('book-category').value = b.category || "An Inspector Griffin Mystery";
                 document.getElementById('book-meta').value = b.meta;
                 document.getElementById('book-synopsis').value = b.synopsis;
+                document.getElementById('book-amazon').value = b.amazonUrl || '';
+                document.getElementById('book-goodreads').value = b.goodreadsUrl || '';
                 document.getElementById('book-preview').innerHTML = `<img src="${b.coverUrl}" onerror="this.style.display='none'">`;
             } else {
                 document.getElementById('book-title').value = '';
                 document.getElementById('book-category').value = 'An Inspector Griffin Mystery';
                 document.getElementById('book-meta').value = '';
                 document.getElementById('book-synopsis').value = '';
+                document.getElementById('book-amazon').value = '';
+                document.getElementById('book-goodreads').value = '';
                 document.getElementById('book-preview').innerHTML = '<span style="color:#666">No image selected</span>';
             }
             document.getElementById('book-modal').style.display = 'flex';
@@ -731,11 +760,13 @@ const defaultCharacters = [
             const category = document.getElementById('book-category').value;
             const meta = document.getElementById('book-meta').value;
             const synopsis = document.getElementById('book-synopsis').value;
+            const amazonUrl = document.getElementById('book-amazon').value.trim();
+            const goodreadsUrl = document.getElementById('book-goodreads').value.trim();
             const fileInput = document.getElementById('book-image');
             let coverUrl = index !== -1 ? books[index].coverUrl : '';
             if (fileInput.files && fileInput.files[0]) coverUrl = fileInput.files[0].name;
 
-            const newBook = { title, category, meta, synopsis, coverUrl, isVisible: true };
+            const newBook = { title, category, meta, synopsis, amazonUrl, goodreadsUrl, coverUrl, isVisible: true };
             if (index !== -1) books[index] = newBook;
             else books.push(newBook);
             saveData();
@@ -795,7 +826,7 @@ const defaultCharacters = [
 
         function generateExportCode() {
             const area = document.getElementById('export-code-area');
-            const code = `// ============================================\n// PASTE THIS CODE IN THE DATA SECTION\n// ============================================\n\nconst defaultBooks = ${JSON.stringify(books, null, 4)};\n\nconst defaultCharacters = ${JSON.stringify(characters, null, 4)};\n\n// ============================================\n// END OF EXPORTED DATA\n// ============================================`;
+            const code = `// ============================================\n// PASTE THIS CODE IN THE DATA SECTION\n// ============================================\n\nconst defaultBooks = ${JSON.stringify(books, null, 4)};\n\nconst defaultCharacters = ${JSON.stringify(characters, null, 4)};\n\nconst defaultSocials = ${JSON.stringify(socials, null, 4)};\n\n// ============================================\n// END OF EXPORTED DATA\n// ============================================`;
             area.value = code;
             area.style.display = 'block';
             document.getElementById('copy-btn').style.display = 'inline-block';
