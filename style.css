@@ -144,8 +144,8 @@ section { padding: 6rem 0; }
     white-space: pre-line; 
 }
 
-.book-action-links { display: flex; gap: 0.5rem; margin-top: auto; flex-wrap: wrap; }
-.book-action-links a { flex: 1; text-align: center; text-decoration: none; min-width: 100px; }
+.book-action-links { display: flex; flex-direction: column; gap: 0.5rem; margin-top: auto; }
+.book-action-links a { width: 100%; text-align: center; text-decoration: none; padding: 0.6rem 0.8rem; }
 
 .form-section {
     width: 50%; max-width: 600px; margin: 0 auto;
