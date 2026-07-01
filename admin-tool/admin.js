@@ -40,18 +40,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const urlKey = urlParams.get('key');
     
-    if (await verifyKey(urlKey) || localStorage.getItem('admin') === 'true') {
+    // Check if already logged in or has valid URL key
+    if (localStorage.getItem('admin') === 'true') {
+        enableAdminMode();
+    } else if (urlKey && await verifyKey(urlKey)) {
         localStorage.setItem('admin', 'true');
         enableAdminMode();
-        if (await verifyKey(urlKey)) {
-            window.history.replaceState({}, document.title, window.location.pathname);
-        }
+        window.history.replaceState({}, document.title, window.location.pathname);
     } else {
-        document.getElementById('admin-status').innerText = "Access Denied";
-        document.getElementById('admin-status').style.color = "#ef4444";
+        // Show login modal
+        document.getElementById('login-modal').style.display = 'flex';
+        document.getElementById('admin-dashboard').style.display = 'none';
     }
 });
-
 function loadData() {
     let storedBooks = localStorage.getItem('rc_books');
     let storedChars = localStorage.getItem('rc_characters');
@@ -339,3 +340,19 @@ window.onclick = function(e) {
         e.target.style.display = 'none';
     }
 };
+
+async function handleLogin(e) {
+    e.preventDefault();
+    
+    const password = document.getElementById('login-password').value;
+    
+    // Verify the password against the hash
+    if (await verifyKey(password)) {
+        localStorage.setItem('admin', 'true');
+        document.getElementById('login-modal').style.display = 'none';
+        enableAdminMode();
+    } else {
+        alert('Invalid password. Please try again.');
+        document.getElementById('login-password').value = '';
+    }
+}

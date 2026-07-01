@@ -11,6 +11,21 @@
 </head>
 <body>
 
+<!-- Login Modal -->
+<div id="login-modal" class="modal" style="display: flex;">
+    <div class="modal-content" style="max-width: 400px;">
+        <h2 style="text-align: center; border: none;">Admin Access</h2>
+        <form onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="login-password" required autocomplete="current-password" placeholder="Enter admin password">
+            </div>
+            <button type="submit" class="btn btn-small btn-edit" style="width: 100%; padding: 0.8rem; margin-top: 1rem;">Login</button>
+        </form>
+    </div>
+</div>
+
+
     <header>
         <div class="container">
             <nav>
