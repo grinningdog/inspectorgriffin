@@ -1,15 +1,19 @@
 // ============================================
 // DATA SECTION - PASTE EXPORTED DATA HERE
 // ============================================
+// REMEMBER: After pasting this into script.js and uploading to GitHub,
+// also update the version number in index.html (change ?v=1 to ?v=2, etc.)
+// to ensure visitors see the new content immediately.
+// ============================================
 const defaultBooks = [
     {
         "title": "Blood Relatives",
         "category": "An Inspector Griffin Mystery",
         "meta": "Inspector Griffin Mystery",
         "synopsis": "A near-miss with a speeding van at Waterloo Station is just the opening move in a deadly new game for Adam Griffin. Reunited with his old school friend, Finn Williams—now an elite white-hat hacker—Adam thinks his biggest challenge is navigating a sudden romance and managing his grandmother's massive literary estate.\n\nA ghost from Adam's past: a woman he had never met, driven by a lifetime of bitter envy and a desperate hunger for his fortune.\n\nIn this 21st-century mystery, Adam and Finn must use every ounce of financial logic and hacking prowess to track a killer who is rapidly unravelling—before her final, desperate strike hits home.",
-        "amazonUrl": "https://www.amazon.co.uk/Great-Hippopotamus-Ladies-Detective-Agency/dp/0349145989",
+        "amazonUrl": "",
         "goodreadsUrl": "",
-        "pdfUrl": "Friendship-and-Support-Info-Pack.pdf",
+        "pdfUrl": "Blood Relatives.pdf",
         "epubUrl": "",
         "coverUrl": "Blood Relatives.jpg",
         "isVisible": true
@@ -40,15 +44,15 @@ const defaultBooks = [
     },
     {
         "category": "Other Works",
-        "isVisible": false,
+        "isVisible": true,
         "amazonUrl": "",
         "goodreadsUrl": "",
         "pdfUrl": "",
         "epubUrl": "",
         "title": "The Silent Observer",
         "meta": "Psychological Thriller",
-        "coverUrl": "silent.jpg",
-        "synopsis": "A standalone thriller about a witness who saw too much."
+        "synopsis": "A standalone thriller about a witness who saw too much.",
+        "coverUrl": "silent.jpg"
     }
 ];
 
@@ -77,8 +81,6 @@ const defaultSocials = {
 // ============================================
 // END OF DATA SECTION
 // ============================================
-
-
 
 document.addEventListener('DOMContentLoaded', () => {
     renderPublic();
