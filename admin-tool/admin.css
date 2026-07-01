@@ -181,3 +181,8 @@ nav { display: flex; justify-content: space-between; align-items: center; height
 #login-modal form {
     margin-top: 1.5rem;
 }
+@media (max-width: 768px) {
+    .admin-list-item { flex-direction: column; align-items: flex-start; }
+    .admin-actions { width: 100%; justify-content: flex-end; }
+    .btn-small { padding: 0.8rem 1rem; font-size: 0.8rem; }
+}
