@@ -1,5 +1,5 @@
 // Force HTTPS for Secure Context (Required for Web Crypto API)
-// Skip this for local files (file:// protocol)
+// Skip this for local files (file:// protocol) and localhost
 if (location.protocol !== 'https:' && location.protocol !== 'file:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
     location.replace('https:' + location.href.substring(location.protocol.length));
 }
@@ -11,12 +11,17 @@ const SECRET_HASH = '7e54c1decffb96bac7476f995ca33e6ac21ceee0e002d7afbf5f1c8f622
 
 async function verifyKey(key) {
     if (!key) return false;
-    const encoder = new TextEncoder();
-    const data = encoder.encode(key);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    const inputHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-    return inputHash === SECRET_HASH;
+    try {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(key);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const inputHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        return inputHash === SECRET_HASH;
+    } catch (e) {
+        console.error("Crypto error:", e);
+        return false;
+    }
 }
 
 // ============================================
@@ -34,25 +39,62 @@ const defaultSocials = { facebook: "", x: "", instagram: "" };
 
 let books = [], characters = [], socials = {}, isAdmin = false;
 
+// ============================================
+// INITIALIZATION & LOGIN
+// ============================================
 document.addEventListener('DOMContentLoaded', async () => {
     loadData();
     
     const urlParams = new URLSearchParams(window.location.search);
     const urlKey = urlParams.get('key');
     
-    // Check if already logged in or has valid URL key
     if (localStorage.getItem('admin') === 'true') {
         enableAdminMode();
-    } else if (urlKey && await verifyKey(urlKey)) {
-        localStorage.setItem('admin', 'true');
-        enableAdminMode();
-        window.history.replaceState({}, document.title, window.location.pathname);
+    } else if (urlKey) {
+        try {
+            const isValid = await verifyKey(urlKey);
+            if (isValid) {
+                localStorage.setItem('admin', 'true');
+                enableAdminMode();
+                window.history.replaceState({}, document.title, window.location.pathname);
+            } else {
+                showLogin();
+            }
+        } catch (error) {
+            console.error('Key verification error:', error);
+            showLogin();
+        }
     } else {
-        // Show login modal
-        document.getElementById('login-modal').style.display = 'flex';
-        document.getElementById('admin-dashboard').style.display = 'none';
+        showLogin();
     }
 });
+
+function showLogin() {
+    const loginModal = document.getElementById('login-modal');
+    if (loginModal) loginModal.style.display = 'flex';
+    
+    const dashboard = document.getElementById('admin-dashboard');
+    if (dashboard) dashboard.style.display = 'none';
+}
+
+async function handleLogin(e) {
+    e.preventDefault();
+    const password = document.getElementById('login-password').value;
+    
+    if (await verifyKey(password)) {
+        localStorage.setItem('admin', 'true');
+        const loginModal = document.getElementById('login-modal');
+        if (loginModal) loginModal.style.display = 'none';
+        enableAdminMode();
+    } else {
+        alert('Invalid password. Please try again.');
+        document.getElementById('login-password').value = '';
+    }
+}
+
+// ============================================
+// DATA MANAGEMENT
+// ============================================
 function loadData() {
     let storedBooks = localStorage.getItem('rc_books');
     let storedChars = localStorage.getItem('rc_characters');
@@ -86,9 +128,20 @@ function resetData() {
 
 function enableAdminMode() {
     isAdmin = true;
-    document.getElementById('admin-dashboard').style.display = 'block';
-    document.getElementById('admin-status').innerText = "Admin Access Granted";
-    document.getElementById('admin-status').style.color = "var(--accent-1)";
+    
+    const dashboard = document.getElementById('admin-dashboard');
+    const status = document.getElementById('admin-status');
+    
+    if (dashboard) dashboard.style.display = 'block';
+    
+    if (status) {
+        status.innerText = "Admin Access Granted";
+        status.style.color = "var(--accent-1)";
+    }
+    
+    const loginModal = document.getElementById('login-modal');
+    if (loginModal) loginModal.style.display = 'none';
+    
     renderAdminLists();
     loadSocialsForm();
 }
@@ -101,39 +154,51 @@ function logout() {
 function switchAdminTab(tab) {
     document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
     event.target.classList.add('active');
-    ['books', 'dossiers', 'socials', 'sync'].forEach(p => document.getElementById(`admin-${p}-panel`).style.display = 'none');
-    document.getElementById(`admin-${tab}-panel`).style.display = 'block';
+    ['books', 'dossiers', 'socials', 'sync'].forEach(p => {
+        const panel = document.getElementById(`admin-${p}-panel`);
+        if (panel) panel.style.display = 'none';
+    });
+    const activePanel = document.getElementById(`admin-${tab}-panel`);
+    if (activePanel) activePanel.style.display = 'block';
 }
 
-// --- Render Lists ---
+// ============================================
+// RENDER LISTS
+// ============================================
 function renderAdminLists() {
-    document.getElementById('admin-books-list').innerHTML = books.map((b, i) => `
-        <div class="admin-list-item">
-            <img class="admin-thumb" src="${b.coverUrl}" onerror="this.style.display='none'">
-            <div class="admin-info"><h4>${b.title}</h4><span class="admin-badge">${b.category}</span><p>${b.meta}</p></div>
-            <div class="admin-actions">
-                <button class="btn-small btn-move" onclick="moveItem('book', ${i}, -1)" ${i === 0 ? 'disabled' : ''}>↑</button>
-                <button class="btn-small btn-move" onclick="moveItem('book', ${i}, 1)" ${i === books.length - 1 ? 'disabled' : ''}>↓</button>
-                <button class="btn-small btn-toggle ${!b.isVisible ? 'is-hidden' : ''}" onclick="toggleVisibility('book', ${i})">${b.isVisible ? 'Hide' : 'Show'}</button>
-                <button class="btn-small btn-edit" onclick="openBookModal(${i})">Edit</button>
-                <button class="btn-small btn-delete" onclick="deleteBook(${i})">Delete</button>
+    const booksList = document.getElementById('admin-books-list');
+    if (booksList) {
+        booksList.innerHTML = books.map((b, i) => `
+            <div class="admin-list-item">
+                <img class="admin-thumb" src="${b.coverUrl}" onerror="this.style.display='none'">
+                <div class="admin-info"><h4>${b.title}</h4><span class="admin-badge">${b.category}</span><p>${b.meta}</p></div>
+                <div class="admin-actions">
+                    <button class="btn-small btn-move" onclick="moveItem('book', ${i}, -1)" ${i === 0 ? 'disabled' : ''}>↑</button>
+                    <button class="btn-small btn-move" onclick="moveItem('book', ${i}, 1)" ${i === books.length - 1 ? 'disabled' : ''}>↓</button>
+                    <button class="btn-small btn-toggle ${!b.isVisible ? 'is-hidden' : ''}" onclick="toggleVisibility('book', ${i})">${b.isVisible ? 'Hide' : 'Show'}</button>
+                    <button class="btn-small btn-edit" onclick="openBookModal(${i})">Edit</button>
+                    <button class="btn-small btn-delete" onclick="deleteBook(${i})">Delete</button>
+                </div>
             </div>
-        </div>
-    `).join('');
+        `).join('');
+    }
 
-    document.getElementById('admin-dossiers-list').innerHTML = characters.map((c, i) => `
-        <div class="admin-list-item">
-            <img class="admin-thumb" src="${c.coverUrl || ''}" onerror="this.style.display='none'">
-            <div class="admin-info"><h4>${c.name}</h4><span class="admin-badge">Character</span><p>${c.role}</p></div>
-            <div class="admin-actions">
-                <button class="btn-small btn-move" onclick="moveItem('char', ${i}, -1)" ${i === 0 ? 'disabled' : ''}>↑</button>
-                <button class="btn-small btn-move" onclick="moveItem('char', ${i}, 1)" ${i === characters.length - 1 ? 'disabled' : ''}>↓</button>
-                <button class="btn-small btn-toggle ${!c.isVisible ? 'is-hidden' : ''}" onclick="toggleVisibility('char', ${i})">${c.isVisible ? 'Hide' : 'Show'}</button>
-                <button class="btn-small btn-edit" onclick="openCharacterModal(${i})">Edit</button>
-                <button class="btn-small btn-delete" onclick="deleteCharacter(${i})">Delete</button>
+    const charsList = document.getElementById('admin-dossiers-list');
+    if (charsList) {
+        charsList.innerHTML = characters.map((c, i) => `
+            <div class="admin-list-item">
+                <img class="admin-thumb" src="${c.coverUrl || ''}" onerror="this.style.display='none'">
+                <div class="admin-info"><h4>${c.name}</h4><span class="admin-badge">Character</span><p>${c.role}</p></div>
+                <div class="admin-actions">
+                    <button class="btn-small btn-move" onclick="moveItem('char', ${i}, -1)" ${i === 0 ? 'disabled' : ''}>↑</button>
+                    <button class="btn-small btn-move" onclick="moveItem('char', ${i}, 1)" ${i === characters.length - 1 ? 'disabled' : ''}>↓</button>
+                    <button class="btn-small btn-toggle ${!c.isVisible ? 'is-hidden' : ''}" onclick="toggleVisibility('char', ${i})">${c.isVisible ? 'Hide' : 'Show'}</button>
+                    <button class="btn-small btn-edit" onclick="openCharacterModal(${i})">Edit</button>
+                    <button class="btn-small btn-delete" onclick="deleteCharacter(${i})">Delete</button>
+                </div>
             </div>
-        </div>
-    `).join('');
+        `).join('');
+    }
 }
 
 function moveItem(type, index, direction) {
@@ -152,7 +217,9 @@ function toggleVisibility(type, index) {
     saveData();
 }
 
-// --- Modals & Saving ---
+// ============================================
+// MODALS & SAVING
+// ============================================
 function openBookModal(index = -1) {
     document.getElementById('book-modal-title').innerText = index === -1 ? "Add Book" : "Edit Book";
     document.getElementById('book-index').value = index;
@@ -244,7 +311,9 @@ function previewImage(input, previewId) {
 
 function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
-// --- Socials ---
+// ============================================
+// SOCIALS
+// ============================================
 function loadSocialsForm() {
     document.getElementById('social-facebook').value = socials.facebook || '';
     document.getElementById('social-x').value = socials.x || '';
@@ -260,7 +329,9 @@ function saveSocials(e) {
     alert('Social links saved!');
 }
 
-// --- Sync (Export/Import) ---
+// ============================================
+// SYNC (EXPORT/IMPORT)
+// ============================================
 function generateExportCode() {
     const area = document.getElementById('export-code-area');
     const code = `// ============================================
@@ -301,13 +372,11 @@ function importData() {
             .join('\n')
             .trim();
         
-        // Use Function constructor to safely evaluate the JavaScript code block
         const parser = new Function(cleanText + '; return { defaultBooks, defaultCharacters, defaultSocials };');
         const parsedData = parser();
 
         if (parsedData.defaultBooks) {
             books = parsedData.defaultBooks;
-            // Migrate old imported data to include all new fields
             books = books.map(b => ({ 
                 category: "An Inspector Griffin Mystery", 
                 isVisible: true, 
@@ -340,19 +409,3 @@ window.onclick = function(e) {
         e.target.style.display = 'none';
     }
 };
-
-async function handleLogin(e) {
-    e.preventDefault();
-    
-    const password = document.getElementById('login-password').value;
-    
-    // Verify the password against the hash
-    if (await verifyKey(password)) {
-        localStorage.setItem('admin', 'true');
-        document.getElementById('login-modal').style.display = 'none';
-        enableAdminMode();
-    } else {
-        alert('Invalid password. Please try again.');
-        document.getElementById('login-password').value = '';
-    }
-}
