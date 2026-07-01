@@ -13,7 +13,7 @@ const defaultBooks = [
         "synopsis": "A near-miss with a speeding van at Waterloo Station is just the opening move in a deadly new game for Adam Griffin. Reunited with his old school friend, Finn Williams—now an elite white-hat hacker—Adam thinks his biggest challenge is navigating a sudden romance and managing his grandmother's massive literary estate.\n\nA ghost from Adam's past: a woman he had never met, driven by a lifetime of bitter envy and a desperate hunger for his fortune.\n\nIn this 21st-century mystery, Adam and Finn must use every ounce of financial logic and hacking prowess to track a killer who is rapidly unravelling—before her final, desperate strike hits home.",
         "amazonUrl": "",
         "goodreadsUrl": "",
-        "pdfUrl": "Blood Relatives.pdf",
+        "pdfUrl": "",
         "epubUrl": "",
         "coverUrl": "Blood Relatives.jpg",
         "isVisible": true
