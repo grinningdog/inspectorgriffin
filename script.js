@@ -11,7 +11,7 @@ const defaultBooks = [
         "isVisible": true,
         "amazonUrl": "",
         "goodreadsUrl": "",
-        "pdfUrl": "",
+        "pdfUrl": "BloodRelatives.pdf",
         "epubUrl": "",
         "title": "Blood Relatives",
         "meta": "Inspector Griffin Mystery",
