@@ -3,66 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- ============================================ -->
-    <!-- BASIC SEO METADATA                           -->
-    <!-- ============================================ -->
     <title>Robert Chester | The Inspector Griffin Mysteries</title>
-    <meta name="description" content="Official website of Robert Chester, author of the Inspector Griffin Mystery series. Read or download Blood Relatives, The Crypto Mystery Weekend, and The Silent Observer.">
-    <meta name="keywords" content="Robert Chester, Inspector Griffin, mystery books, thriller, LGBT, Blood Relatives, The Crypto Mystery Weekend, The Choirboy Killer, free ebooks, PDF, EPUB">
-    <meta name="author" content="bob" >
-
-    <!-- ============================================ -->
-    <!-- OPEN GRAPH (Facebook, LinkedIn, WhatsApp)    -->
-    <!-- ============================================ -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Robert Chester | The Inspector Griffin Mysteries">
-    <meta property="og:description" content="Official website of Robert Chester. Explore the Inspector Griffin Mystery series and download free PDF and EPUB books.">
-    <meta property="og:url" content="https://www.robertchester.co.uk/">
-    <meta property="og:image" content="https://www.robertchester.co.uk/blood-relatives-social.jpg">
-
-    <!-- ============================================ -->
-    <!-- TWITTER CARDS (X / Twitter)                  -->
-    <!-- ============================================ -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Robert Chester | The Inspector Griffin Mysteries">
-    <meta name="twitter:description" content="Official website of Robert Chester. Explore the Inspector Griffin Mystery series and download free PDF and EPUB books.">
-    <meta name="twitter:image" content="https://www.robertchester.co.uk/blood-relatives-social.jpg .jpg">
-
-    <!-- ============================================ -->
-    <!-- CANONICAL URL (For SEO & Redirects)          -->
-    <!-- ============================================ -->
-    <link rel="canonical" href="https://www.robertchester.co.uk/">
-
-    <!-- ============================================ -->
-    <!-- SCHEMA.ORG (Structured Data for Google)      -->
-    <!-- ============================================ -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Author",
-      "name": "Robert Chester",
-      "genre": "Mystery, Thriller",
-      "book": [
-        {
-          "@type": "Book",
-          "name": "Blood Relatives",
-          "description": "A near-miss with a speeding van at Waterloo Station is just the opening move in a deadly new game for Adam Griffin."
-        },
-        {
-          "@type": "Book",
-          "name": "The Crypto Mystery Weekend",
-          "description": "An exclusive Murder Mystery weekend at a luxury Oxfordshire estate turns deadly when a real body is found bludgeoned in the garden."
-        },
-        {
-          "@type": "Book",
-          "name": "The Silent Observer",
-          "description": "A standalone thriller about a witness who saw too much."
-        }
-      ]
-    }
-    </script>
-
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -70,48 +11,43 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-
     <header>
-        <div class="container">
-            <nav>
-                <a href="#home" class="logo">Robert Chester</a>
-                <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
-                <ul class="nav-links" id="navLinks">
-                    <li><a href="#home" onclick="toggleMenu()">Home</a></li>
-                    <li><a href="#books" onclick="toggleMenu()">Books</a></li>
-                    <li><a href="#dossiers" onclick="toggleMenu()">Dossiers</a></li>
-                    <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
+        <nav>
+            <a href="#home" class="logo">Robert Chester</a>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#books">Books</a></li>
+                <li><a href="#dossiers">Dossiers</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
     </header>
 
     <section id="home" class="hero">
         <div class="container">
-            <h1>The Inspector Griffin <br><strong class="gradient-text">Mysteries</strong></h1>
+            <h1>The Inspector Griffin Mysteries<br><strong>Robert Chester</strong></h1>
             <p>When Adam Griffin meets Finn Williams, the world changes.</p>
- 				<p>Adam Griffin is the sole heir to his grandmother - the legendary writer of the Inspector Griffin novels.</p> 
-				<p> Finn Willams is a master hacker, recruited from school by the British Intelligence Service MI5 and now probably the best ethical hacker in the world."</p>
-				<p> When they reunite, their relationship sparks but they are surrounded by intrigue and mystery. "</p>
-
+            <p>Adam Griffin is the sole heir to his grandmother - the legendary writer of the Inspector Griffin novels. Finn Williams is a master hacker, recruited from school by the British Intelligence Service MI5 and now probably the best ethical hacker in the world.</p>
+            <p>When they reunite, their relationship sparks but they are surrounded by intrigue and mystery.</p>
             <a href="#books" class="btn">Explore the Cases</a>
         </div>
     </section>
 
     <section id="books">
         <div class="container">
-            <h2 class="section-title">The <span class="gradient-text">Books</span></h2>
-            <h3 class="category-header">An Inspector Griffin Mystery</h3>
-            <div id="books-griffin" class="grid-container"></div>
-            <h3 id="other-works-header" class="category-header">Other Works</h3>
-            <div id="books-other" class="grid-container"></div>
+            <h2 class="section-title">The Books</h2>
+            <div class="category-header" id="griffin-header">An Inspector Griffin Mystery</div>
+            <div class="grid-container" id="books-griffin"></div>
+            <div class="category-header" id="other-works-header">Other Works</div>
+            <div class="grid-container" id="books-other"></div>
         </div>
     </section>
 
     <section id="dossiers">
         <div class="container">
-            <h2 class="section-title">Character <span class="gradient-text">Dossiers</span></h2>
-            <div id="dossiers-container" class="grid-container"></div>
+            <h2 class="section-title">Character Dossiers</h2>
+            <div class="grid-container" id="dossiers-container"></div>
         </div>
     </section>
 
@@ -119,6 +55,7 @@
         <div class="container">
             <h2 class="section-title">Get In <span class="gradient-text">Touch</span></h2>
             <div class="form-section">
+                <!-- Contact Form (Web3Forms) -->
                 <form action="https://api.web3forms.com/submit" method="POST">
                     <input type="hidden" name="access_key" value="199893c8-b1b4-464e-8a6a-4c30dca92931">
                     <input type="hidden" name="subject" value="New Contact Form Submission - Robert Chester Website">
@@ -128,7 +65,10 @@
                     <div class="form-group"><label for="contact-message">Message</label><textarea id="contact-message" name="message" required placeholder="Your message..."></textarea></div>
                     <button type="submit" class="submit-btn">Send Message</button>
                 </form>
+                
                 <div class="form-divider"></div>
+                
+                <!-- Mailing List Form (Web3Forms) -->
                 <form action="https://api.web3forms.com/submit" method="POST">
                     <input type="hidden" name="access_key" value="10273041-54af-48f6-a152-3560099fc314">
                     <input type="hidden" name="subject" value="New Mailing List Subscription - Robert Chester Website">
@@ -142,14 +82,39 @@
     </section>
 
     <footer>
-        <div class="container">
-            <div id="footer-socials" class="footer-socials"></div>
-            <div class="footer-divider"></div>
-            <p>&copy; 2026 Robert Chester. All Rights Reserved.</p>
-        </div>
+        <div class="footer-socials" id="footer-socials"></div>
+        <div class="footer-divider"></div>
+        <p>© 2026 Robert Chester. All Rights Reserved.</p>
     </footer>
 
-    <script src="script.js" defer></script>
+    <!-- Download Popup Modal -->
+    <div id="download-modal" class="modal-overlay" onclick="if(event.target === this) closeDownloadModal()">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeDownloadModal()">&times;</button>
+            
+            <h3 class="modal-title">Download Your Book</h3>
+            <p class="modal-text">Before you download, would you like to join the mailing list for news on new books?</p>
+            
+            <div id="modal-initial-actions" class="modal-actions">
+                <button class="modal-btn modal-btn-primary" onclick="showMailingListForm()">Yes, sign me up</button>
+                <button class="modal-btn modal-btn-secondary" onclick="triggerDirectDownload()">No thanks, just download</button>
+            </div>
+
+            <div id="modal-form-container" class="modal-form-container">
+                <form onsubmit="handleMailingListSubmit(event)">
+                    <input type="hidden" name="access_key" value="10273041-54af-48f6-a152-3560099fc314">
+                    <input type="hidden" name="subject" value="New Mailing List Subscription - Popup Download">
+                    <input type="checkbox" name="botcheck" style="display: none;">
+                    <div class="form-group"><label for="modal-name">Name</label><input type="text" id="modal-name" name="name" required placeholder="Your name"></div>
+                    <div class="form-group"><label for="modal-email">Email Address</label><input type="email" id="modal-email" name="email" required placeholder="your@email.com"></div>
+                    <button type="submit" class="submit-btn">Join & Download</button>
+                </form>
+            </div>
+
+            <div id="modal-success" class="success-message"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
-
