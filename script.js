@@ -9,26 +9,26 @@ const defaultBooks = [
     {
         "category": "An Inspector Griffin Mystery",
         "isVisible": true,
-        "amazonUrl": "",
+        "amazonUrl": "https://www.amazon.co.uk/Great-Hippopotamus-Ladies-Detective-Agency/dp/0349145989",
         "goodreadsUrl": "",
-        "pdfUrl": "Blood Relatives - Robert Chester.pdf",
-        "epubUrl": "Blood Relatives - Robert Chester.epub",
+        "pdfUrl": "",
+        "epubUrl": "",
         "title": "Blood Relatives",
         "meta": "Inspector Griffin Mystery",
-        "synopsis": "A near-miss with a speeding van at Waterloo Station is just the opening move in a deadly new game for Adam Griffin. Reunited with his old school friend, Finn Williams—now an elite white-hat hacker—Adam thinks his biggest challenge is navigating a sudden romance and managing his grandmother's massive literary estate.\n\nA ghost from Adam's past: a woman he had never met, driven by a lifetime of bitter envy and a desperate hunger for his fortune.\n\nIn this 21st-century mystery, Adam and Finn must use every ounce of financial logic and hacking prowess to track a killer who is rapidly unravelling—before her final, desperate strike hits home.",
-        "coverUrl": "Blood Relatives.jpg"
+        "coverUrl": "Blood Relatives.jpg",
+        "synopsis": "A near-miss with a speeding van at Waterloo Station is just the opening move in a deadly new game for Adam Griffin. Reunited with his old school friend, Finn Williams—now an elite white-hat hacker—Adam thinks his biggest challenge is navigating a sudden romance and managing his grandmother's massive literary estate.\n\nA ghost from Adam's past: a woman he had never met, driven by a lifetime of bitter envy and a desperate hunger for his fortune.\n\nIn this 21st-century mystery, Adam and Finn must use every ounce of financial logic and hacking prowess to track a killer who is rapidly unravelling—before her final, desperate strike hits home."
     },
     {
-        "title": "The Crypto Mystery Weekend",
         "category": "An Inspector Griffin Mystery",
-        "meta": "Inspector Griffin Mystery",
-        "synopsis": "An exclusive Murder Mystery weekend at a luxury Oxfordshire estate turns deadly when a real body is found bludgeoned in the garden.\n\nFor independently wealthy Adam Griffin and his partner Finn, a top-tier ethical hacker, the investigation quickly morphs from a cozy whodunit into a high-stakes cyber chase.\n\nAt the centre of it all? A fastidiously arrogant guest, a manipulative psychic medium and a hidden USB drive holding a secret. A secret worth killing for.\n\nTo catch a killer who has played everyone for a fool, they must follow the money—before the digital trail goes cold forever.",
+        "isVisible": true,
         "amazonUrl": "",
         "goodreadsUrl": "",
-        "pdfUrl": "The Crypto Mystery Weekend - Robert Chester.pdf",
-        "epubUrl": "The Crypto Mystery Weekend - Robert Chester.epub",
+        "pdfUrl": "",
+        "epubUrl": "",
+        "title": "The Crypto Mystery Weekend",
+        "meta": "Inspector Griffin Mystery",
         "coverUrl": "A Crypto Mystery Weekend3.jpg",
-        "isVisible": true
+        "synopsis": "An exclusive Murder Mystery weekend at a luxury Oxfordshire estate turns deadly when a real body is found bludgeoned in the garden.\n\nFor independently wealthy Adam Griffin and his partner Finn, a top-tier ethical hacker, the investigation quickly morphs from a cozy whodunit into a high-stakes cyber chase.\n\nAt the centre of it all? A fastidiously arrogant guest, a manipulative psychic medium and a hidden USB drive holding a secret. A secret worth killing for.\n\nTo catch a killer who has played everyone for a fool, they must follow the money—before the digital trail goes cold forever."
     },
     {
         "category": "An Inspector Griffin Mystery",
@@ -39,8 +39,8 @@ const defaultBooks = [
         "epubUrl": "",
         "title": "The Choirboy Killer",
         "meta": "An Inspector Griffin Mystery",
-        "synopsis": "Coming Soon\n\nA killer stalks Soho.  Can Adam and Finn find the murderer before he strikes again?",
-        "coverUrl": "the choirboy killer.jpg"
+        "coverUrl": "the choirboy killer.jpg",
+        "synopsis": "Coming Soon\n\nA killer stalks Soho.  Can Adam and Finn find the murderer before he strikes again?"
     },
     {
         "category": "Other Works",
@@ -51,18 +51,18 @@ const defaultBooks = [
         "epubUrl": "",
         "title": "The Silent Observer",
         "meta": "Psychological Thriller",
-        "synopsis": "A standalone thriller about a witness who saw too much.",
-        "coverUrl": "silent.jpg"
+        "coverUrl": "silent.jpg",
+        "synopsis": "A standalone thriller about a witness who saw too much."
     }
 ];
 
 const defaultCharacters = [
     {
-        "isVisible": true,
         "name": "Adam Griffin",
         "role": "The wealthy grandson of one of the world's greatest mystery writers.",
-        "bio": "When Adam met Finn Williams they found themselves embroiled in mystery and intrigue",
-        "coverUrl": ""
+        "bio": "Adam Griffin inherited a fortune from his grandmother - probably the greatest crime writer of the last hundred years.  He also inherited her instinct for investigating crime and scandal.\n\nWhen Adam met his partner Finn Williams they found themselves embroiled in mystery and intrigue.",
+        "coverUrl": "",
+        "isVisible": true
     },
     {
         "isVisible": true,
