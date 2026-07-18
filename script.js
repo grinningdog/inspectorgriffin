@@ -74,7 +74,7 @@ const defaultCharacters = [
 ];
 
 const defaultSocials = {
-    "facebook": "https://www.facebook.com/",
+    "facebook": "https://www.facebook.com/profile.php?id=61591991853151",
     "x": "https://www.x.com/",
     "instagram": "https://www.instagram.com/"
 };
