@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Excerpt - Robert Chester</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-overlay: rgba(5, 2, 2, 0.70);
+            --bg-card: rgba(15, 5, 5, 0.65);
+            --text-primary: #e5e5e5;
+            --text-secondary: #a3a3a3;
+            --accent-1: #dc2626;
+            --accent-2: #7f1d1d;
+            --gradient: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            --glass-border: rgba(220, 38, 38, 0.15);
+            --font-heading: 'Montserrat', sans-serif;
+            --font-body: 'Raleway', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: #050202;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+            font-size: 1.05rem;
+        }
+
+        body::before {
+            content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-overlay); z-index: -2;
+        }
+
+        .gradient-text {
+            background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; display: inline-block; font-weight: 700;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+        /* Header */
+        header {
+            position: fixed; top: 0; width: 100%; background: rgba(5, 2, 2, 0.85);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border); z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px; margin: 0 auto; padding: 0 2rem;
+            display: flex; justify-content: space-between; align-items: center; height: 80px;
+        }
+
+        .logo {
+            font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; letter-spacing: 3px;
+            color: var(--text-primary); text-decoration: none; text-transform: uppercase;
+        }
+
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+
+        .nav-links a {
+            color: var(--text-secondary); text-decoration: none; font-family: var(--font-heading);
+            font-size: 0.85rem; font-weight: 500; text-transform: uppercase; letter-spacing: 2px;
+            transition: all 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--accent-1); }
+
+        /* Excerpt Section */
+        .excerpt-section { padding: 8rem 0 4rem; }
+
+        .excerpt-card {
+            background: var(--bg-card); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border); border-radius: 4px; overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6); max-width: 800px; margin: 0 auto;
+        }
+
+        .excerpt-header { padding: 2.5rem 2.5rem 0; text-align: center; }
+
+        .excerpt-header h1 {
+            font-family: var(--font-heading); font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 700; margin-bottom: 0.5rem; letter-spacing: 1px; text-transform: uppercase;
+        }
+
+        .excerpt-meta {
+            color: var(--accent-1); font-size: 0.75rem; text-transform: uppercase;
+            letter-spacing: 2px; font-weight: 600; font-family: var(--font-heading); margin-bottom: 2rem;
+        }
+
+        .excerpt-content {
+            padding: 0 2.5rem 2.5rem; color: var(--text-secondary);
+            font-size: 1.05rem; line-height: 1.9;
+        }
+
+        .excerpt-content h2, .excerpt-content h3 {
+            font-family: var(--font-heading); color: var(--text-primary);
+            margin: 2rem 0 1rem; text-transform: uppercase; letter-spacing: 1px;
+        }
+        .excerpt-content h2 { font-size: 1.5rem; }
+        .excerpt-content h3 { font-size: 1.25rem; }
+        .excerpt-content p { margin-bottom: 1.5rem; }
+        
+        .excerpt-content blockquote {
+            border-left: 3px solid var(--accent-1); padding-left: 1.5rem;
+            margin: 2rem 0; font-style: italic; color: var(--text-primary);
+        }
+
+        .excerpt-content strong, .excerpt-content em { color: var(--text-primary); }
+        .excerpt-content strong { font-weight: 600; }
+        
+        .excerpt-content a { color: var(--accent-1); text-decoration: underline; transition: all 0.3s; }
+        .excerpt-content a:hover { color: #ef4444; }
+        
+        .excerpt-content ul, .excerpt-content ol { margin: 1.5rem 0; padding-left: 2rem; }
+        .excerpt-content li { margin-bottom: 0.5rem; }
+        .excerpt-content hr { border: none; border-top: 1px solid var(--glass-border); margin: 2.5rem 0; }
+
+        /* Back to Website Links */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-family: var(--font-heading);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 4px;
+        }
+
+        .back-link:hover {
+            color: var(--accent-1);
+            border-bottom-color: var(--accent-1);
+        }
+
+        .back-link-top {
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+
+        .back-link-bottom {
+            text-align: center;
+            margin-top: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Contact Section */
+        section#contact { padding: 4rem 0 6rem; }
+
+        .section-title {
+            font-family: var(--font-heading); font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 700;
+            margin-bottom: 3rem; letter-spacing: 4px; text-align: center; text-transform: uppercase;
+        }
+
+        .section-title::after {
+            content: ''; display: block; width: 80px; height: 2px; background: var(--gradient); margin: 1.5rem auto 0;
+        }
+
+        .form-section {
+            width: 50%; max-width: 600px; margin: 0 auto;
+            background: var(--bg-card); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            padding: 3rem; border-radius: 12px; border: 1px solid var(--glass-border);
+        }
+
+        .form-group { margin-bottom: 1.5rem; }
+
+        .form-group label {
+            display: block; margin-bottom: 0.5rem; color: var(--text-secondary);
+            font-size: 0.85rem; font-family: var(--font-heading); text-transform: uppercase; letter-spacing: 1px;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%; padding: 0.875rem; background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.25); border-radius: 4px; color: var(--text-primary);
+            font-size: 1rem; font-family: var(--font-body); transition: all 0.3s;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none; border-color: var(--accent-1); box-shadow: 0 0 10px rgba(220, 38, 38, 0.2);
+        }
+
+        .form-group textarea { resize: vertical; min-height: 120px; }
+
+        .submit-btn {
+            width: 100%; padding: 1.1rem 2rem; background: var(--gradient); color: #ffffff;
+            border: none; border-radius: 50px; font-family: var(--font-heading); font-weight: 600;
+            font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; cursor: pointer;
+            transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+        }
+
+        .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(220, 38, 38, 0.5); filter: brightness(1.1); }
+
+        .form-divider { margin: 4rem 0; border-top: 1px solid var(--glass-border); position: relative; }
+
+        .form-divider::before {
+            content: 'OR'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            background: var(--bg-card); padding: 0 1.5rem; color: var(--text-secondary);
+            font-family: var(--font-heading); text-transform: uppercase; letter-spacing: 2px; font-size: 0.85rem;
+        }
+
+        /* Footer & Social */
+        footer {
+            text-align: center; padding: 4rem 2rem 3rem; border-top: 1px solid var(--glass-border);
+            color: var(--text-secondary); font-family: var(--font-heading);
+        }
+
+        .social-links {
+            display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 2.5rem;
+        }
+
+        .social-links a {
+            color: var(--text-secondary); text-decoration: none;
+            display: flex; align-items: center; justify-content: center;
+            width: 44px; height: 44px; border-radius: 50%;
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-1); border-color: var(--accent-1);
+            transform: translateY(-4px); box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+        }
+
+        .social-links svg { width: 20px; height: 20px; fill: currentColor; }
+
+        .footer-divider { width: 80px; height: 2px; background: var(--gradient); margin: 0 auto 2rem; }
+        .copyright { font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 400; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .form-section { width: 95%; padding: 2rem 1.5rem; }
+            .excerpt-content { padding: 0 1.5rem 1.5rem; }
+            .excerpt-header { padding: 2rem 1.5rem 0; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a class="logo" href="index.html">Robert Chester</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#books">Books</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Excerpt Section -->
+    <section class="excerpt-section">
+        <div class="container">
+            <div class="excerpt-card">
+                <div class="excerpt-header">
+                    <!-- Top Back Link -->
+                    <div class="back-link-top">
+                        <a href="index.html" class="back-link">← Visit the Robert Chester website</a>
+                    </div>
+                    
+                    <h1>Excerpt Title Here</h1>
+                    <div class="excerpt-meta">From "Book Title" • Chapter 1</div>
+                </div>
+                
+                <div class="excerpt-content">
+                    <!-- PASTE YOUR FORMATTED TEXT BELOW THIS LINE -->
+
+                    <p>This is where your excerpt text goes. You can paste formatted text here and it will maintain the site's dark aesthetic.</p>
+
+                    <p>The text will appear in a soft gray color against the dark card background, with <strong>bold text</strong> and <em>italic text</em> appearing in the lighter primary color.</p>
+
+                    <blockquote>
+                        "This is a blockquote. It has a red accent border on the left side and uses italic styling to stand out from regular paragraphs."
+                    </blockquote>
+
+                    <h3>Chapter Subheadings Work Too</h3>
+
+                    <p>You can include subheadings, lists, and other formatting:</p>
+
+                    <ul>
+                        <li>Bullet point one</li>
+                        <li>Bullet point two</li>
+                        <li>Bullet point three</li>
+                    </ul>
+
+                    <!-- PASTE YOUR FORMATTED TEXT ABOVE THIS LINE -->
+                </div>
+            </div>
+
+            <!-- Bottom Back Link -->
+            <div class="back-link-bottom">
+                <a href="index.html" class="back-link">← Visit the Robert Chester website</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In <span class="gradient-text">Touch</span></h2>
+            <div class="form-section">
+                <!-- Contact Form -->
+                <form action="https://api.web3forms.com/submit" method="POST">
+                    <input name="access_key" type="hidden" value="199893c8-b1b4-464e-8a6a-4c30dca92931"/>
+                    <input name="subject" type="hidden" value="New Contact Form Submission - Excerpt Page"/>
+                    <input name="botcheck" style="display: none;" type="checkbox"/>
+                    <div class="form-group">
+                        <label for="contact-name">Name</label>
+                        <input id="contact-name" name="name" placeholder="Your name" required type="text"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-email">Email</label>
+                        <input id="contact-email" name="email" placeholder="your@email.com" required type="email"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-message">Message</label>
+                        <textarea id="contact-message" name="message" placeholder="Your message..." required></textarea>
+                    </div>
+                    <button class="submit-btn" type="submit">Send Message</button>
+                </form>
+                
+                <div class="form-divider"></div>
+                
+                <!-- Mailing List Form -->
+                <form action="https://api.web3forms.com/submit" method="POST">
+                    <input name="access_key" type="hidden" value="10273041-54af-48f6-a152-3560099fc314"/>
+                    <input name="subject" type="hidden" value="New Mailing List Subscription - Excerpt Page"/>
+                    <input name="botcheck" style="display: none;" type="checkbox"/>
+                    <div class="form-group">
+                        <label for="mailing-name">Name</label>
+                        <input id="mailing-name" name="name" placeholder="Your name" required type="text"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="mailing-email">Email Address</label>
+                        <input id="mailing-email" name="email" placeholder="your@email.com" required type="email"/>
+                    </div>
+                    <button class="submit-btn" type="submit">Subscribe to Mailing List</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer with Social Media -->
+    <footer>
+        <div class="social-links">
+            <!-- Twitter / X -->
+            <a href="https://twitter.com/YOUR_HANDLE" aria-label="Twitter" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <!-- Facebook -->
+            <a href="https://facebook.com/YOUR_PAGE" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <!-- Instagram -->
+            <a href="https://instagram.com/YOUR_HANDLE" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <!-- Goodreads (or replace with Amazon/LinkedIn) -->
+            <a href="https://goodreads.com/YOUR_PROFILE" aria-label="Goodreads" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24"><path d="M11.43 23.995c-3.608-.208-6.274-2.077-6.448-5.078.695.005 1.375-.015 2.07-.01.164 1.878 1.863 2.928 4.238 3.058 2.375-.13 4.074-1.18 4.238-3.058.695-.005 1.375.015 2.07.01-.174 3.001-2.84 4.87-6.448 5.078h.28zm-3.15-8.26c-.685-.15-1.24-.49-1.62-.99-.38-.5-.57-1.14-.57-1.92 0-.78.19-1.42.57-1.92.38-.5.935-.84 1.62-.99v4.83zm8.44 0c.685-.15 1.24-.49 1.62-.99.38-.5.57-1.14.57-1.92 0-.78-.19-1.42-.57-1.92-.38-.5-.935-.84-1.62-.99v4.83zm-4.72-13.73c-3.608.208-6.274 2.077-6.448 5.078.695-.005 1.375.015 2.07.01.164-1.878 1.863-2.928 4.238-3.058 2.375.13 4.074 1.18 4.238 3.058.695-.005 1.375.015 2.07.01-.174-3.001-2.84-4.87-6.448-5.078h.28z"/></svg>
+            </a>
+        </div>
+        
+        <div class="footer-divider"></div>
+        <p class="copyright">© 2026 Robert Chester. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
