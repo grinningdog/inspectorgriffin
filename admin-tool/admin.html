@@ -5,43 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard | Robert Chester</title>
     <link rel="stylesheet" href="admin.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<!-- Login Modal -->
-<div id="login-modal" class="modal" style="display: flex;">
-    <div class="modal-content" style="max-width: 400px;">
-        <h2 style="text-align: center; border: none;">Admin Access</h2>
-        <form onsubmit="handleLogin(event)">
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" id="login-password" required autocomplete="current-password" placeholder="Enter admin password">
-            </div>
-            <button type="submit" class="btn btn-small btn-edit" style="width: 100%; padding: 0.8rem; margin-top: 1rem;">Login</button>
-        </form>
-    </div>
-</div>
-
-
-    <header>
-        <div class="container">
-            <nav>
-                <a href="#" class="logo">Admin Dashboard</a>
-                <div id="admin-status" style="color: var(--accent-1); font-family: var(--font-heading); text-transform: uppercase; letter-spacing: 2px; font-size: 0.85rem;">Checking Access...</div>
-            </nav>
+    <!-- LOGIN MODAL -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <h2>Admin Access</h2>
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit" class="submit-btn">Login</button>
+            </form>
         </div>
+    </div>
+
+    <!-- ADMIN DASHBOARD -->
+    <header>
+        <nav>
+            <a href="#" class="logo">Robert Chester <span style="font-size:0.8rem; color:var(--accent-1)">[Admin Dashboard]</span></a>
+            <div id="admin-status" style="color:var(--text-secondary); font-size:0.8rem;">Checking Access...</div>
+        </nav>
     </header>
 
-    <section id="admin-dashboard" style="display: none;">
+    <main id="admin-dashboard" style="display:none;">
         <div class="container">
             <div class="admin-header">
                 <h2>Site Manager</h2>
-                <div style="display: flex; gap: 1rem;">
-                    <button onclick="resetData()" class="btn-small btn-toggle" style="color: var(--accent-1); border-color: var(--accent-1);">Reset to Defaults</button>
-                    <button onclick="logout()" class="btn-small btn-delete">Logout</button>
+                <div>
+                    <button class="btn-small btn-delete" onclick="resetData()">Reset to Defaults</button>
+                    <button class="btn-small btn-toggle" onclick="logout()">Logout</button>
                 </div>
             </div>
 
@@ -52,104 +48,150 @@
                 <button class="admin-tab" onclick="switchAdminTab('sync')">Sync Data</button>
             </div>
 
+            <!-- BOOKS PANEL -->
             <div id="admin-books-panel">
-                <button class="btn btn-small btn-add" onclick="openBookModal()">+ Add New Book</button>
+                <button class="btn-small btn-add" onclick="openBookModal()">+ Add New Book</button>
                 <div id="admin-books-list"></div>
             </div>
 
-            <div id="admin-dossiers-panel" style="display: none;">
-                <button class="btn btn-small btn-add" onclick="openCharacterModal()">+ Add New Character</button>
+            <!-- DOSSIERS PANEL -->
+            <div id="admin-dossiers-panel" style="display:none;">
+                <button class="btn-small btn-add" onclick="openCharacterModal()">+ Add New Character</button>
                 <div id="admin-dossiers-list"></div>
             </div>
 
-            <div id="admin-socials-panel" style="display: none;">
-                <h3 style="color: var(--text-primary); margin-bottom: 1.5rem; font-family: var(--font-heading); text-transform: uppercase; letter-spacing: 2px;">Social Media Links</h3>
-                <p style="color: var(--text-secondary); margin-bottom: 2rem; font-size: 0.9rem;">Leave a field blank to hide that icon from the public footer.</p>
-                <form onsubmit="saveSocials(event)">
-                    <div class="form-row">
-                        <div class="form-group"><label>Facebook URL</label><input type="text" id="social-facebook" placeholder="https://facebook.com/..."></div>
-                        <div class="form-group"><label>X (Twitter) URL</label><input type="text" id="social-x" placeholder="https://x.com/..."></div>
-                    </div>
-                    <div class="form-group"><label>Instagram URL</label><input type="text" id="social-instagram" placeholder="https://instagram.com/..."></div>
-                    <button type="submit" class="btn btn-small btn-edit" style="padding: 0.8rem 1.5rem;">Save Social Links</button>
-                </form>
+            <!-- SOCIALS PANEL -->
+            <div id="admin-socials-panel" style="display:none;">
+                <div class="form-section" style="max-width:600px; margin:0 auto;">
+                    <h3 style="margin-bottom:2rem; text-align:center;">Social Media Links</h3>
+                    <p style="text-align:center; color:var(--text-secondary); margin-bottom:2rem;">Leave a field blank to hide that icon from the public footer.</p>
+                    <form onsubmit="saveSocials(event)">
+                        <div class="form-group">
+                            <label>Facebook URL</label>
+                            <input type="text" id="social-facebook">
+                        </div>
+                        <div class="form-group">
+                            <label>X (Twitter) URL</label>
+                            <input type="text" id="social-x">
+                        </div>
+                        <div class="form-group">
+                            <label>Instagram URL</label>
+                            <input type="text" id="social-instagram">
+                        </div>
+                        <button type="submit" class="submit-btn">Save Social Links</button>
+                    </form>
+                </div>
             </div>
 
-            <div id="admin-sync-panel" style="display: none;">
-                <h3 style="color: var(--text-primary); margin-bottom: 1.5rem; font-family: var(--font-heading); text-transform: uppercase; letter-spacing: 2px;">Sync with Live Site</h3>
-                
-                <div style="margin-bottom: 3rem;">
-                    <h4 style="color: var(--text-primary); margin-bottom: 1rem; font-family: var(--font-heading);">1. Export (To update GitHub)</h4>
-                    <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.9rem;">Copy the code below and paste it into the <strong>DATA SECTION</strong> of your public <code>script.js</code> file on GitHub.</p>
-                    <button class="btn btn-small btn-add" onclick="generateExportCode()">Generate Export Code</button>
-                    <textarea id="export-code-area" class="export-area" readonly style="display:none;"></textarea>
-                    <button id="copy-btn" class="btn btn-small btn-edit" style="display:none; margin-top: 1rem;" onclick="copyExportCode()">Copy to Clipboard</button>
-                </div>
+            <!-- SYNC PANEL -->
+            <div id="admin-sync-panel" style="display:none;">
+                <div class="form-section" style="max-width:800px; margin:0 auto;">
+                    <h3 style="margin-bottom:2rem; text-align:center;">Sync with Live Site</h3>
 
-                <div>
-                    <h4 style="color: var(--text-primary); margin-bottom: 1rem; font-family: var(--font-heading);">2. Import (From live site)</h4>
-                    <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.9rem;">If you are on a different computer, paste the current <code>DATA SECTION</code> from your live <code>script.js</code> file here to sync this local tool.</p>
-                    <textarea id="import-code-area" class="export-area" placeholder="Paste the entire DATA SECTION from script.js here..."></textarea>
-                    <button class="btn btn-small btn-edit" style="margin-top: 1rem; padding: 0.8rem 1.5rem;" onclick="importData()">Import Data</button>
+                    <h4 style="margin-top:2rem; color:var(--accent-1);">1. Export (To update GitHub)</h4>
+                    <p style="color:var(--text-secondary); margin-bottom:1rem;">Copy the code below and paste it into the DATA SECTION of your public `script.js` file on GitHub.</p>
+                    <button class="btn-small btn-edit" onclick="generateExportCode()">Generate Export Code</button>
+                    <textarea id="export-code-area" class="export-area" style="display:none;" readonly></textarea>
+                    <button id="copy-btn" class="btn-small btn-toggle" style="display:none; margin-top:1rem;" onclick="copyExportCode()">Copy to Clipboard</button>
+
+                    <h4 style="margin-top:3rem; color:var(--accent-1);">2. Import (From live site)</h4>
+                    <p style="color:var(--text-secondary); margin-bottom:1rem;">If you are on a different computer, paste the current `DATA SECTION` from your live `script.js` file here to sync this local tool.</p>
+                    <textarea id="import-code-area" class="export-area" placeholder="Paste your public script.js data section here..."></textarea>
+                    <button class="btn-small btn-edit" style="margin-top:1rem;" onclick="importData()">Import Data</button>
                 </div>
             </div>
         </div>
-    </section>
+    </main>
 
-    <!-- Book Modal -->
+    <!-- ADD/EDIT BOOK MODAL -->
     <div id="book-modal" class="modal">
         <div class="modal-content">
             <h2 id="book-modal-title">Add Book</h2>
             <form onsubmit="saveBook(event)">
                 <input type="hidden" id="book-index">
                 <div class="form-row">
-                    <div class="form-group"><label>Title</label><input type="text" id="book-title" required></div>
-                    <div class="form-group"><label>Category</label>
-                        <select id="book-category" required>
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" id="book-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="book-category">
                             <option value="An Inspector Griffin Mystery">An Inspector Griffin Mystery</option>
                             <option value="Other Works">Other Works</option>
                         </select>
                     </div>
                 </div>
-                <div class="form-group"><label>Meta</label><input type="text" id="book-meta" required></div>
-                <div class="form-group"><label>Synopsis</label><textarea id="book-synopsis" rows="4" required></textarea></div>
-                
-                <div class="form-row">
-                    <div class="form-group"><label>Amazon URL</label><input type="text" id="book-amazon" placeholder="https://amazon.com/..."></div>
-                    <div class="form-group"><label>Goodreads URL</label><input type="text" id="book-goodreads" placeholder="https://goodreads.com/..."></div>
+                <div class="form-group">
+                    <label>Meta (Subtitle)</label>
+                    <input type="text" id="book-meta">
+                </div>
+                <div class="form-group">
+                    <label>Synopsis</label>
+                    <textarea id="book-synopsis" rows="6"></textarea>
                 </div>
                 <div class="form-row">
-                    <div class="form-group"><label>PDF Download URL</label><input type="text" id="book-pdf" placeholder="https://.../book.pdf"></div>
-                    <div class="form-group"><label>EPUB Download URL</label><input type="text" id="book-epub" placeholder="https://.../book.epub"></div>
+                    <div class="form-group"><label>Amazon URL</label><input type="text" id="book-amazon"></div>
+                    <div class="form-group"><label>Goodreads URL</label><input type="text" id="book-goodreads"></div>
                 </div>
-
-                <div class="form-group"><label>Cover Image Filename</label><input type="file" id="book-image" accept="image/*" onchange="previewImage(this, 'book-preview')"><div class="image-preview" id="book-preview"><span style="color: #666;">No image selected</span></div></div>
-                <div style="display: flex; gap: 1rem; margin-top: 1rem;">
-                    <button type="submit" class="btn btn-small btn-edit" style="flex: 1; padding: 0.8rem;">Save Book</button>
-                    <button type="button" class="btn btn-small btn-delete" style="flex: 1; padding: 0.8rem;" onclick="closeModal('book-modal')">Cancel</button>
+                <div class="form-row">
+                    <div class="form-group"><label>PDF Download URL</label><input type="text" id="book-pdf"></div>
+                    <div class="form-group"><label>EPUB Download URL</label><input type="text" id="book-epub"></div>
+                </div>
+                <div class="form-group">
+                    <label>Page URL Filename</label>
+                    <input type="text" id="book-page-url" placeholder="e.g. blood-relatives.html">
+                    <small style="color:var(--text-secondary); font-size:0.75rem;">Leave blank to auto-generate from title</small>
+                </div>
+                <div class="form-group">
+                    <label>Cover Image Filename</label>
+                    <input type="file" id="book-image" accept="image/*" onchange="previewImage(this, 'book-preview')">
+                    <div id="book-preview" class="image-preview"><span style="color:#666">No image selected</span></div>
+                </div>
+                <div style="display:flex; gap:1rem; justify-content:flex-end; margin-top:2rem;">
+                    <button type="button" class="btn-small btn-toggle" onclick="closeModal('book-modal')">Cancel</button>
+                    <button type="submit" class="btn-small btn-edit">Save Book</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- Character Modal -->
+    <!-- ADD/EDIT CHARACTER MODAL -->
     <div id="character-modal" class="modal">
         <div class="modal-content">
             <h2 id="character-modal-title">Add Character</h2>
             <form onsubmit="saveCharacter(event)">
                 <input type="hidden" id="char-index">
-                <div class="form-group"><label>Name</label><input type="text" id="char-name" required></div>
-                <div class="form-group"><label>Role</label><input type="text" id="char-role" required></div>
-                <div class="form-group"><label>Bio</label><textarea id="char-bio" rows="4" required></textarea></div>
-                <div class="form-group"><label>Portrait Filename</label><input type="file" id="char-image" accept="image/*" onchange="previewImage(this, 'char-preview')"><div class="image-preview" id="char-preview"><span style="color: #666;">No image selected</span></div></div>
-                <div style="display: flex; gap: 1rem; margin-top: 1rem;">
-                    <button type="submit" class="btn btn-small btn-edit" style="flex: 1; padding: 0.8rem;">Save Character</button>
-                    <button type="button" class="btn btn-small btn-delete" style="flex: 1; padding: 0.8rem;" onclick="closeModal('character-modal')">Cancel</button>
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" id="char-name" required>
+                </div>
+                <div class="form-group">
+                    <label>Role</label>
+                    <input type="text" id="char-role">
+                </div>
+                <div class="form-group">
+                    <label>Bio</label>
+                    <textarea id="char-bio" rows="6"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Page URL Filename</label>
+                    <input type="text" id="char-page-url" placeholder="e.g. finn-williams.html">
+                    <small style="color:var(--text-secondary); font-size:0.75rem;">Leave blank to auto-generate from name</small>
+                </div>
+                <div class="form-group">
+                    <label>Portrait Filename</label>
+                    <input type="file" id="char-image" accept="image/*" onchange="previewImage(this, 'char-preview')">
+                    <div id="char-preview" class="image-preview"><span style="color:#666">No image selected</span></div>
+                </div>
+                <div style="display:flex; gap:1rem; justify-content:flex-end; margin-top:2rem;">
+                    <button type="button" class="btn-small btn-toggle" onclick="closeModal('character-modal')">Cancel</button>
+                    <button type="submit" class="btn-small btn-edit">Save Character</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <script src="admin.js" defer></script>
+    <script src="admin.js"></script>
 </body>
 </html>
