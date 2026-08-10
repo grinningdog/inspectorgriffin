@@ -4,24 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blood Relatives | An Inspector Griffin Mystery by Robert Chester</title>
-    <meta name="description" content="Read the synopsis and download Blood Relatives, the first Inspector Griffin Mystery. Adam Griffin and hacker Finn Williams track a killer driven by envy and a hunger for fortune.">
-    
-    <!-- BOOK SCHEMA MARKUP (Crucial for SEO) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Book",
-      "name": "Blood Relatives",
-      "author": {
-        "@type": "Person",
-        "name": "Robert Chester"
-      },
-      "genre": ["Mystery", "Crime Fiction", "Thriller"],
-      "description": "A near-miss with a speeding van at Waterloo Station is just the opening move in a deadly new game for Adam Griffin. Reunited with his old school friend, Finn Williams—now an elite white-hat hacker—Adam thinks his biggest challenge is navigating a sudden romance and managing his grandmother's massive literary estate.",
-      "inLanguage": "en"
-    }
-    </script>
-
+    <meta name="description" content="Read the synopsis and download Blood Relatives, the first Inspector Griffin Mystery. Adam Griffin and hacker Finn Williams track a killer driven by envy.">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
@@ -35,7 +18,8 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="index.html#books">Books</a></li>
                 <li><a href="index.html#dossiers">Characters</a></li>
-                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="series-guide.html">Series Guide</a></li>
             </ul>
         </nav>
     </header>
@@ -43,26 +27,21 @@
     <main class="page-content">
         <div class="container">
             <a href="index.html#books" class="btn btn-small btn-toggle" style="margin-bottom: 2rem;">&larr; Back to All Books</a>
-            
+
             <div class="book-detail-grid">
                 <div class="book-detail-cover">
-                    <img src="Blood Relatives.jpg" alt="Book cover of Blood Relatives, an Inspector Griffin Mystery by Robert Chester">
+                    <img id="dynamic-cover" src="" alt="">
                 </div>
                 <div class="book-detail-info">
-                    <h1 class="gradient-text">Blood Relatives</h1>
+                    <h1 id="dynamic-title" class="gradient-text"></h1>
                     <p class="meta">An Inspector Griffin Mystery</p>
-                    
-                    <h2 class="category-header" style="margin-top: 1rem;">Synopsis</h2>
-                    <p class="synopsis-full">
-                        A near-miss with a speeding van at Waterloo Station is just the opening move in a deadly new game for Adam Griffin. Reunited with his old school friend, Finn Williams—now an elite white-hat hacker—Adam thinks his biggest challenge is navigating a sudden romance and managing his grandmother's massive literary estate.<br><br>
-                        A ghost from Adam's past: a woman he had never met, driven by a lifetime of bitter envy and a desperate hunger for his fortune.<br><br>
-                        In this 21st-century mystery, Adam and Finn must use every ounce of financial logic and hacking prowess to track a killer who is rapidly unravelling—before her final, desperate strike hits home.
-                    </p>
+
+                    <h2 class="category-header" style="margin-top: 1rem;">Full Synopsis</h2>
+                    <p id="dynamic-synopsis" class="synopsis-full"></p>
 
                     <div class="book-action-links" style="max-width: 300px; margin-top: 2rem;">
-                        <a href="javascript:void(0);" onclick="openDownloadModal('Blood Relatives.pdf')" class="btn-small btn-edit">Download PDF</a>
-                        <a href="javascript:void(0);" onclick="openDownloadModal('Blood Relatives - Robert Chester.epub')" class="btn-small btn-edit">Download EPUB</a>
-                        <!-- Add Amazon/Goodreads links here when you have them -->
+                        <a id="dynamic-pdf-link" href="javascript:void(0);" class="btn-small btn-edit">Download PDF</a>
+                        <a id="dynamic-epub-link" href="javascript:void(0);" class="btn-small btn-edit">Download EPUB</a>
                     </div>
                 </div>
             </div>
@@ -70,24 +49,27 @@
     </main>
 
     <footer>
+        <div class="footer-links">
+            <a href="about.html">About Robert Chester</a>
+            <a href="series-guide.html">Series Reading Order</a>
+        </div>
         <div class="footer-socials" id="footer-socials"></div>
         <div class="footer-divider"></div>
         <p>&copy; 2026 Robert Chester. All Rights Reserved.</p>
     </footer>
 
-    <!-- Re-use the exact same modal from index.html -->
     <div class="modal-overlay" id="download-modal">
         <div class="modal-content">
             <button class="modal-close" onclick="closeDownloadModal()">&times;</button>
             <h3 class="modal-title">Download Your Book</h3>
-            <p class="modal-text">Before you download, would you like to join the mailing list for news on new books?</p>
+            <p class="modal-text">Before you download, would you like to join the mailing list?</p>
             <div class="modal-actions" id="modal-initial-actions">
                 <button class="modal-btn modal-btn-primary" onclick="showMailingListForm()">Yes, sign me up</button>
                 <button class="modal-btn modal-btn-secondary" onclick="triggerDirectDownload()">No thanks, just download</button>
             </div>
             <div class="modal-form-container" id="modal-form-container">
                 <form id="mailing-list-form" onsubmit="handleMailingListSubmit(event)">
-                    <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_KEY">
+                    <input type="hidden" name="access_key" value="10273041-54af-48f6-a152-3560099fc314">
                     <div class="form-group"><label>Name</label><input type="text" name="name" required></div>
                     <div class="form-group"><label>Email</label><input type="email" name="email" required></div>
                     <button type="submit" class="submit-btn">Join & Download</button>

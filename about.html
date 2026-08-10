@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Robert Chester | Author of British Cyber Thrillers</title>
+    <meta name="description" content="Meet Robert Chester, the author behind the Inspector Griffin Mysteries. Discover the inspiration for Adam Griffin, Finn Williams, and his unique blend of British crime fiction and high-tech hacking.">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="index.html" class="logo">Robert Chester</a>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#books">Books</a></li>
+                <li><a href="index.html#dossiers">Characters</a></li>
+                <li><a href="about.html" style="color:var(--accent-1);">About</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="page-content">
+        <div class="container">
+            <div class="interview-grid">
+
+                <div class="interview-header">
+                    <h1 class="gradient-text">About Robert Chester</h1>
+                    <p class="meta">Author of the Inspector Griffin Mysteries</p>
+                    <p class="synopsis-full" style="text-align: left;">
+                        Robert Chester is a contemporary British author specializing in high-stakes cyber thrillers and modern crime fiction. Blending the classic "whodunit" structure of Golden Age mysteries with the digital complexities of the 21st century, Chester creates worlds where financial logic and ethical hacking collide.
+                        <br><br>
+                        Best known for <strong>The Inspector Griffin Mysteries</strong>, Chester explores themes of legacy, identity, and the hidden dangers of our connected world. His protagonists, the wealthy amateur sleuth Adam Griffin and the elite MI5-trained hacker Finn Williams, have captivated readers looking for diverse, LGBTQ+ representation in the mystery genre.
+                        <br><br>
+                        When not writing, Robert can be found researching the latest cybersecurity trends or exploring the historic streets of London that often serve as the backdrop for his novels.
+                    </p>
+                </div>
+
+                <div class="interview-content">
+                    <h2 class="category-header">Explore the World of Inspector Griffin</h2>
+                    <p style="color:var(--text-secondary); margin-bottom: 2rem;">
+                        Dive deeper into the stories and the people who inhabit them.
+                    </p>
+
+                    <h3 style="font-family: var(--font-heading); color: var(--accent-1); margin-bottom: 1rem;">Latest Books</h3>
+                    <div id="about-books" class="grid-container" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;"></div>
+
+                    <h3 style="font-family: var(--font-heading); color: var(--accent-1); margin-bottom: 1rem;">Key Characters</h3>
+                    <div id="about-characters" class="grid-container" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;"></div>
+
+                    <div style="margin-top: 3rem; text-align: center;">
+                        <h3 class="category-header" style="justify-content: center;">Connect with Robert</h3>
+                        <p style="color:var(--text-secondary); margin-bottom: 1.5rem;">
+                            For press inquiries, book club discussions, or just to say hello.
+                        </p>
+                        <a href="index.html#contact" class="btn">Get In Touch</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="about.html">About Robert Chester</a>
+            <a href="series-guide.html">Series Reading Order</a>
+        </div>
+        <div class="footer-socials" id="footer-socials"></div>
+        <div class="footer-divider"></div>
+        <p>&copy; 2026 Robert Chester. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

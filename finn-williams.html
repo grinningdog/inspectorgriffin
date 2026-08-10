@@ -5,25 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Finn Williams | Character Interview & Dossier | Robert Chester</title>
     <meta name="description" content="Read an exclusive interview with Finn Williams, the elite MI5-trained ethical hacker and co-protagonist in the Inspector Griffin Mysteries by Robert Chester.">
-    
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Finn Williams",
-      "description": "Master Hacker and MI5 recruit, protagonist in the Inspector Griffin Mysteries.",
-      "creator": {
-        "@type": "Person",
-        "name": "Robert Chester"
-      }
-    }
-    </script>
-
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-
     <header>
         <nav>
             <a href="index.html" class="logo">Robert Chester</a>
@@ -32,7 +17,8 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="index.html#books">Books</a></li>
                 <li><a href="index.html#dossiers">Characters</a></li>
-                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="series-guide.html">Series Guide</a></li>
             </ul>
         </nav>
     </header>
@@ -40,56 +26,56 @@
     <main class="page-content">
         <div class="container">
             <a href="index.html#dossiers" class="btn btn-small btn-toggle" style="margin-bottom: 2rem;">&larr; Back to Dossiers</a>
-            
+
             <div class="interview-grid">
                 <div class="interview-header">
-                    <h1 class="gradient-text">Finn Williams</h1>
-                    <p class="meta">Master Hacker</p>
-                    <p class="synopsis-full">
-                        Recruited to MI5 as a teenager, Finn Williams is one of the top five computer hackers in the world. After leaving the intelligence services he became a white-hat hacker committed to protecting computer systems around the world. When he met Adam Griffin their mutual attraction and instant connection made a strong bond.
-                    </p>
+                    <h1 id="dynamic-name" class="gradient-text"></h1>
+                    <p id="dynamic-role" class="meta"></p>
+                    <p id="dynamic-bio" class="synopsis-full"></p>
                 </div>
 
                 <div class="interview-content">
                     <h2 class="category-header">Robert Chester's Interview with Finn</h2>
-                    
-                    <!-- Easy to slot new Q&As in here -->
+
                     <div class="interview-block">
                         <p class="interview-q"><strong>Robert Chester:</strong> Finn, take us back to the beginning. How does a teenager get recruited by MI5?</p>
-                        <p class="interview-a"><strong>Finn Williams:</strong> It wasn't exactly a standard recruitment drive. I was fifteen, bored out of my mind in a secondary school computer lab, and I accidentally accessed a major utility company.  That gave me lots of ideas and eventually I could access big banks, giant companies and, of course MI5 and MI6.  When I bypassed a firewall that GCHQ had spent fifteen million pounds building it did actually set off some alarm bells, but by then there were little text files saying 'Finn was here' in lots of interesting places.. Instead of arresting me, they offered me a job. The rest is history.</p>
+                        <p class="interview-a"><strong>Finn Williams:</strong> It wasn't exactly a standard recruitment drive. I was fifteen, bored out of my mind in a secondary school computer lab, and I accidentally accessed a major utility company. That gave me lots of ideas and eventually I could access big banks, giant companies and, of course, MI5 and MI6. When I bypassed a firewall that GCHQ had spent fifteen million pounds building it did actually set off some alarm bells, but by then there were little text files saying 'Finn was here' in lots of interesting places. Instead of arresting me, they offered me a job. The rest is history.</p>
                     </div>
+
                     <div class="interview-block">
-                        <p class="interview-q"><strong>Robert Chester:</strong> Wasn't it scary, getting arrested by MI5?</p>
-                        <p class="interview-a"><strong>Finn Williams:</strong> Not really because I knew they couldn't deal with the fallout from a trial or make me disappear.  Logically there was only one outcome.  I think my poor dad had a few palpitations though.</p>
+                        <p class="interview-q"><strong>RC:</strong> Wasn't it scary, getting arrested by MI5?</p>
+                        <p class="interview-a"><strong>FW:</strong> Not really because I knew they couldn't deal with the fallout from a trial or make me disappear. Logically there was only one outcome. I think my poor dad had a few palpitations though.</p>
                     </div>
 
-                 <div class="interview-block">
-                        <p class="interview-q"><strong>Robert Chester:</strong> Talking of your dad, what was it like being brought up by two dads?</p>
-                        <p class="interview-a"><strong>Finn Williams:</strong> No different really. As long as you have people that love you and protect you, that's all that counts.  I must admit it did make life easier when I wanted to come out myself.  Obviously there was no drama.</p>
-                    </div>
-                 <div class="interview-block">
-                        <p class="interview-q"><strong>Robert Chester:</strong> And you met Adam when you were twenty one??</p>
-                        <p class="interview-a"><strong>Finn Williams:</strong> Sort of.  We went to the same school but didn't really know each other. We did have a bit of a fling when we were sixteen but I got whisked off into the Intelligence Service and it didn't go anywhere. </p>
+                    <div class="interview-block">
+                        <p class="interview-q"><strong>RC:</strong> Talking of your dad, what was it like being brought up by two dads?</p>
+                        <p class="interview-a"><strong>FW:</strong> No different really. As long as you have people that love you and protect you, that's all that counts. I must admit it did make life easier when I wanted to come out myself. Obviously there was no drama.</p>
                     </div>
 
+                    <div class="interview-block">
+                        <p class="interview-q"><strong>RC:</strong> And you met Adam when you were twenty-one?</p>
+                        <p class="interview-a"><strong>FW:</strong> Sort of. We went to the same school but didn't really know each other. We did have a bit of a fling when we were sixteen, but I got whisked off into the Intelligence Service and it didn't go anywhere.</p>
+                    </div>
 
                     <div class="interview-block">
                         <p class="interview-q"><strong>RC:</strong> You and Adam make quite the team. How do your different skill sets complement each other during an investigation?</p>
                         <p class="interview-a"><strong>FW:</strong> Adam is the money and the logic. He sees the physical world, the financial trails, the human motives. I see the digital shadows. When Adam is shaking hands and finding the lie in someone's eyes, I'm already three layers deep into their encrypted cloud storage. We cover each other's blind spots.</p>
                     </div>
-                    
-                     <div class="interview-block">
-                        <p class="interview-q"><strong>Robert Chester:</strong> So here you are, wealthy and successful, but how do you see the future?</p>
-                        <p class="interview-a"><strong>Finn Williams:</strong> Honestly?  Hand on heart, I'd give up all the money and the trappings just to spend the day with Adam.  I feel like my future is completely entwined with him regardless of what the future holds.</p>
-                    </div>
 
-                    <!-- Add more interview blocks here as needed -->
+                    <div class="interview-block">
+                        <p class="interview-q"><strong>RC:</strong> So here you are, wealthy and successful, but how do you see the future?</p>
+                        <p class="interview-a"><strong>FW:</strong> Honestly? Hand on heart, I'd give up all the money and the trappings just to spend the day with Adam. I feel like my future is completely entwined with him regardless of what the future holds.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
 
     <footer>
+        <div class="footer-links">
+            <a href="about.html">About Robert Chester</a>
+            <a href="series-guide.html">Series Reading Order</a>
+        </div>
         <div class="footer-socials" id="footer-socials"></div>
         <div class="footer-divider"></div>
         <p>&copy; 2026 Robert Chester. All Rights Reserved.</p>

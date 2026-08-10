@@ -3,12 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- SEO TAGS -->
     <title>Robert Chester | British Mystery & Cyber Thriller Author</title>
     <meta name="description" content="Discover the Inspector Griffin Mysteries by Robert Chester. Dive into 21st-century British crime fiction featuring amateur sleuth Adam Griffin and elite hacker Finn Williams. Features diverse LGBTQ+ characters and relationships.">
     <meta name="keywords" content="Robert Chester, Inspector Griffin Mysteries, British crime fiction, cyber thriller, mystery novels, free mystery download, LGBT, LGBTQ+, queer fiction">
-
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
@@ -16,10 +13,10 @@
 
     <header>
         <nav>
-            <a href="#home" class="logo">Robert Chester</a>
+            <a href="index.html" class="logo">Robert Chester</a>
             <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
             <ul class="nav-links" id="navLinks">
-                <li><a href="#home">Home</a></li>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="#books">Books</a></li>
                 <li><a href="#dossiers">Characters</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -28,19 +25,15 @@
     </header>
 
     <main>
-        <!-- HERO SECTION -->
         <section class="hero" id="home">
             <div class="container">
                 <h1>The Inspector Griffin Mysteries <strong>Robert Chester</strong></h1>
-                <p>When Adam Griffin meets Finn Williams, the world changes. Adam Griffin is the sole heir to his grandmother - the legendary writer of the Inspector Griffin novels. Finn Williams is a master hacker, recruited from school by the British Intelligence Service MI5 and now probably the best ethical hacker in the world.</p>
-                <p>When they reunite, their relationship sparks but they are surrounded by intrigue and mystery.</p>
-
-                <!-- YOUR UPDATED BUTTON -->
+                <p>When Adam Griffin meets Finn Williams, the world changes. Adam Griffin is the sole heir to his grandmother—the legendary writer of the Inspector Griffin novels. Finn Williams is a master hacker, recruited from school by the British Intelligence Service MI5 and now probably the best ethical hacker in the world.</p>
+                <p>When they reunite, their relationship sparks, but they are surrounded by intrigue and mystery.</p>
                 <a href="#books" class="btn">Explore the Cases<br><br>Read more and download free books</a>
             </div>
         </section>
 
-        <!-- BOOKS SECTION -->
         <section id="books">
             <div class="container">
                 <h2 class="section-title">The Books</h2>
@@ -51,7 +44,6 @@
             </div>
         </section>
 
-        <!-- DOSSIERS SECTION -->
         <section id="dossiers">
             <div class="container">
                 <h2 class="section-title">Character Dossiers</h2>
@@ -59,12 +51,9 @@
             </div>
         </section>
 
-        <!-- CONTACT & NEWSLETTER SECTION -->
         <section id="contact">
             <div class="container">
                 <h2 class="section-title">Get In Touch</h2>
-
-                <!-- Contact Form -->
                 <div class="form-section">
                     <form id="contact-form" onsubmit="handleContactSubmit(event)">
                         <input type="hidden" name="access_key" value="199893c8-b1b4-464e-8a6a-4c30dca92931">
@@ -85,10 +74,7 @@
                         <p class="success-message" id="contact-success" style="display:none; text-align:center; margin-top:1rem;">Message sent successfully!</p>
                     </form>
                 </div>
-
                 <div class="form-divider"></div>
-
-                <!-- Newsletter Form -->
                 <div class="form-section">
                     <h3 style="text-align:center; margin-bottom:1.5rem; font-family:var(--font-heading);">Join the Mailing List</h3>
                     <form id="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
@@ -111,12 +97,15 @@
     </main>
 
     <footer>
+        <div class="footer-links">
+            <a href="about.html">About Robert Chester</a>
+            <a href="series-guide.html">Series Reading Order</a>
+        </div>
         <div class="footer-socials" id="footer-socials"></div>
         <div class="footer-divider"></div>
         <p>&copy; 2026 Robert Chester. All Rights Reserved.</p>
     </footer>
 
-    <!-- DOWNLOAD MODAL -->
     <div class="modal-overlay" id="download-modal">
         <div class="modal-content">
             <button class="modal-close" onclick="closeDownloadModal()">&times;</button>
