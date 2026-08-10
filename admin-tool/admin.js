@@ -1,4 +1,5 @@
 // Force HTTPS for Secure Context (Required for Web Crypto API)
+// Skip this for local files (file:// protocol) and localhost
 if (location.protocol !== 'https:' && location.protocol !== 'file:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
     location.replace('https:' + location.href.substring(location.protocol.length));
 }
@@ -24,45 +25,45 @@ async function verifyKey(key) {
 }
 
 // ============================================
-// DEFAULT FALLBACK DATA (CLEANED - NO TRAILING SPACES)
+// DEFAULT FALLBACK DATA (YOUR EXACT CLEAN DATA)
 // ============================================
 const defaultBooks = [
     {
-        "title": "Blood Relatives",
         "category": "An Inspector Griffin Mystery",
-        "meta": "Inspector Griffin Mystery",
-        "coverUrl": "Blood Relatives.jpg",
-        "synopsis": "A near-miss with a speeding van at Waterloo Station is just the opening move in a deadly new game for Adam Griffin. Reunited with his old school friend, Finn Williams—now an elite white-hat hacker—Adam thinks his biggest challenge is navigating a sudden romance and managing his grandmother's massive literary estate.\n\nA ghost from Adam's past: a woman he had never met, driven by a lifetime of bitter envy and a desperate hunger for his fortune.\n\nIn this 21st-century mystery, Adam and Finn must use every ounce of financial logic and hacking prowess to track a killer who is rapidly unravelling—before her final, desperate strike hits home.",
+        "isVisible": true,
         "amazonUrl": "",
         "goodreadsUrl": "",
         "pdfUrl": "Blood Relatives.pdf",
         "epubUrl": "Blood Relatives - Robert Chester.epub",
         "pageUrl": "blood-relatives.html",
-        "isVisible": true
+        "title": "Blood Relatives",
+        "meta": "Inspector Griffin Mystery",
+        "coverUrl": "Blood Relatives.jpg",
+        "synopsis": "A near-miss with a speeding van at Waterloo Station is just the opening move in a deadly new game for Adam Griffin. Reunited with his old school friend, Finn Williams—now an elite white-hat hacker—Adam thinks his biggest challenge is navigating a sudden romance and managing his grandmother's massive literary estate.\n\nA ghost from Adam's past: a woman he had never met, driven by a lifetime of bitter envy and a desperate hunger for his fortune.\n\nIn this 21st-century mystery, Adam and Finn must use every ounce of financial logic and hacking prowess to track a killer who is rapidly unravelling—before her final, desperate strike hits home."
     },
 {
-    "title": "The Crypto Mystery Weekend",
     "category": "An Inspector Griffin Mystery",
-    "meta": "Inspector Griffin Mystery",
-    "coverUrl": "The Crypto Mystery Weekend3.jpg",
-    "synopsis": "An exclusive Murder Mystery weekend at a luxury Oxfordshire estate turns deadly when a real body is found bludgeoned in the garden.\n\nFor independently wealthy Adam Griffin and his partner Finn, a top-tier ethical hacker, the investigation quickly morphs from a cozy whodunit into a high-stakes cyber chase.\n\nAt the centre of it all? A fastidiously arrogant guest, a manipulative psychic medium and a hidden USB drive holding a secret. A secret worth killing for.\n\nTo catch a killer who has played everyone for a fool, they must follow the money—before the digital trail goes cold forever.",
+    "isVisible": true,
     "amazonUrl": "",
     "goodreadsUrl": "",
     "pdfUrl": "The Crypto Mystery Weekend - Robert Chester.pdf",
     "epubUrl": "The Crypto Mystery Weekend - Robert Chester.epub",
     "pageUrl": "crypto-mystery.html",
-    "isVisible": true
+    "title": "The Crypto Mystery Weekend",
+    "meta": "Inspector Griffin Mystery",
+    "coverUrl": "The Crypto Mystery Weekend3.jpg",
+    "synopsis": "An exclusive Murder Mystery weekend at a luxury Oxfordshire estate turns deadly when a real body is found bludgeoned in the garden.\n\nFor independently wealthy Adam Griffin and his partner Finn, a top-tier ethical hacker, the investigation quickly morphs from a cozy whodunit into a high-stakes cyber chase.\n\nAt the centre of it all? A fastidiously arrogant guest, a manipulative psychic medium and a hidden USB drive holding a secret. A secret worth killing for.\n\nTo catch a killer who has played everyone for a fool, they must follow the money—before the digital trail goes cold forever."
 },
 {
     "title": "The Choirboy Killer",
     "category": "An Inspector Griffin Mystery",
     "meta": "An Inspector Griffin Mystery",
-    "coverUrl": "the choirboy killer.jpg",
     "synopsis": "Coming Soon\n\nA killer stalks Soho. Can Adam and Finn find the murderer before he strikes again?",
     "amazonUrl": "",
     "goodreadsUrl": "",
     "pdfUrl": "",
     "epubUrl": "",
+    "coverUrl": "the choirboy killer.jpg",
     "pageUrl": "#",
     "isVisible": true
 }
@@ -70,28 +71,39 @@ const defaultBooks = [
 
 const defaultCharacters = [
     {
+        "isVisible": true,
+        "pageUrl": "adam-griffin.html",
         "name": "Adam Griffin",
         "role": "The wealthy grandson of one of the world's greatest mystery writers.",
         "bio": "Adam Griffin inherited a fortune from his grandmother - probably the greatest crime writer of the last hundred years. He also inherited her instinct for investigating crime and scandal.\n\nWhen Adam met his partner Finn Williams they found themselves embroiled in mystery and intrigue.",
-        "coverUrl": "",
-        "pageUrl": "adam-griffin.html",
-        "isVisible": true
+        "coverUrl": ""
     },
 {
+    "isVisible": true,
+    "pageUrl": "finn-williams.html",
     "name": "Finn Williams",
     "role": "Master Hacker",
     "bio": "Recruited to MI5 as a teenager, Finn Williams is one of the top five computer hackers in the world. After leaving the intelligence services he became a white-hat hacker committed to protecting computer systems around the world.\n\nWhen he met Adam Griffin their mutual attraction and instant connection made a strong bond.",
-    "coverUrl": "",
-    "pageUrl": "finn-williams.html",
-    "isVisible": true
+    "coverUrl": ""
+},
+{
+    "isVisible": true,
+    "pageUrl": "robby-dorset.html",
+    "name": "Robby Dorset",
+    "role": "Old family friend",
+    "bio": "Robby Dorset has known Adam from Adam's birth and was the best friend of his grandmother. Always full of surprises he is a man who knows everyone, knows all their secrets and loves mystery and intrigue.",
+    "coverUrl": ""
 }
 ];
 
 const defaultSocials = {
-    "facebook": "https://www.facebook.com/",
+    "facebook": "https://www.facebook.com/profile.php?id=61591991853151",
     "x": "https://www.x.com/",
     "instagram": "https://www.instagram.com/"
 };
+// ============================================
+// END OF DATA SECTION
+// ============================================
 
 let books = [], characters = [], socials = {}, isAdmin = false;
 
@@ -467,11 +479,17 @@ function generateExportCode() {
     alert('⚠️ REMEMBER: After uploading script.js to GitHub, also update the version number in index.html (change ?v=1 to ?v=2, etc.) to ensure visitors see the new content immediately.');
 }
 
-function copyExportCode() {
+async function copyExportCode() {
     const area = document.getElementById('export-code-area');
-    area.select();
-    document.execCommand('copy');
-    alert('Export code copied! Paste it into your public script.js file.');
+    try {
+        await navigator.clipboard.writeText(area.value);
+        alert('Export code copied! Paste it into your public script.js file.');
+    } catch (err) {
+        console.error('Failed to copy text: ', err);
+        area.select();
+        document.execCommand('copy');
+        alert('Export code copied using fallback method!');
+    }
 }
 
 function importData() {

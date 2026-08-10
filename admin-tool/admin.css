@@ -13,11 +13,12 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
+
 html { scroll-behavior: smooth; }
 
 body {
     background-color: #050202;
-    background-image: url('../bg.jpg'); /* Assumes admin folder is next to public folder */
+    background-image: url('../bg.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -67,6 +68,7 @@ nav { display: flex; justify-content: space-between; align-items: center; height
 }
 
 .admin-tab:hover { color: var(--text-primary); border-color: var(--accent-1); }
+
 .admin-tab.active { background: var(--accent-1); color: #050202; border-color: var(--accent-1); font-weight: 700; }
 
 .admin-list-item {
@@ -78,10 +80,20 @@ nav { display: flex; justify-content: space-between; align-items: center; height
 
 .admin-list-item:hover { border-color: var(--accent-1); background: rgba(20, 5, 5, 0.8); }
 
-.admin-thumb { width: 60px; height: 90px; object-fit: cover; border-radius: 4px; flex-shrink: 0; background: #111; }
+/* Updated to object-fit: contain to prevent cropping on portraits */
+.admin-thumb { 
+    width: 60px; 
+    height: 90px; 
+    object-fit: contain; 
+    background: #000;
+    border-radius: 4px; 
+    flex-shrink: 0; 
+}
 
 .admin-info { flex-grow: 1; }
+
 .admin-info h4 { font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 0.25rem; color: var(--text-primary); }
+
 .admin-info p { color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 0.5rem; }
 
 .admin-badge {
@@ -112,6 +124,7 @@ nav { display: flex; justify-content: space-between; align-items: center; height
     background: #333333; color: #ffffff; border: 1px solid #555555;
     font-size: 1.2rem; padding: 0.4rem 1rem; font-weight: bold; line-height: 1;
 }
+
 .btn-move:hover:not(:disabled) { background: #444444; border-color: #777777; }
 .btn-move:disabled { opacity: 0.3; cursor: not-allowed; background: #222222; }
 
@@ -134,6 +147,7 @@ nav { display: flex; justify-content: space-between; align-items: center; height
 }
 
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+
 .form-group { margin-bottom: 1.5rem; }
 
 .form-group label {
@@ -157,7 +171,12 @@ nav { display: flex; justify-content: space-between; align-items: center; height
     width: 100%; height: 180px; background: #000; margin-top: 0.5rem; display: flex;
     align-items: center; justify-content: center; border: 1px dashed rgba(255,255,255,0.2); border-radius: 4px; overflow: hidden;
 }
-.image-preview img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+.image-preview img { 
+    max-width: 100%; 
+    max-height: 100%; 
+    object-fit: contain; /* Ensures preview matches portrait format */
+}
 
 .export-area {
     width: 100%; height: 300px; background: #000; color: #0f0; font-family: monospace;
@@ -170,6 +189,7 @@ nav { display: flex; justify-content: space-between; align-items: center; height
     font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; cursor: pointer;
     transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
 }
+
 .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(220, 38, 38, 0.5); filter: brightness(1.1); }
 
 @media (max-width: 768px) {
@@ -178,7 +198,6 @@ nav { display: flex; justify-content: space-between; align-items: center; height
     .admin-actions { width: 100%; justify-content: flex-end; }
 }
 
-/* Login Modal */
 #login-modal {
 display: flex;
 position: fixed;
@@ -192,15 +211,18 @@ z-index: 3000;
 justify-content: center;
 align-items: center;
 }
+
 #login-modal .modal-content {
 max-width: 400px;
 width: 90%;
 }
+
 #login-modal h2 {
 text-align: center;
 border: none;
 margin-bottom: 2rem;
 }
+
 #login-modal form {
 margin-top: 1.5rem;
 }
