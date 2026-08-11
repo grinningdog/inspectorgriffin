@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Block access to the Admin Dashboard to keep it private and save crawl budget
+Disallow: /admin.html
+Disallow: /admin.js
+Disallow: /admin.css
+
+# Sitemap location (helps Google find all your pages faster)
+Sitemap: https://www.robertchester.co.uk/sitemap.xml
