@@ -6,5 +6,8 @@ Disallow: /admin.html
 Disallow: /admin.js
 Disallow: /admin.css
 
+# Block access to book downloads to protect KDP Select exclusivity
+Disallow: /private-downloads/
+
 # Sitemap location (helps Google find all your pages faster)
 Sitemap: https://www.robertchester.co.uk/sitemap.xml
