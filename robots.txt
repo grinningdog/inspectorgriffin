@@ -1,13 +1,11 @@
 User-agent: *
 Allow: /
 
-# Block access to the Admin Dashboard to keep it private and save crawl budget
-Disallow: /admin.html
-Disallow: /admin.js
-Disallow: /admin.css
+# Block admin tools and scripts
+Disallow: /admin-tool/
 
-# Block access to book downloads to protect KDP Select exclusivity
+# Block book downloads to protect KDP Select exclusivity
 Disallow: /private-downloads/
 
-# Sitemap location (helps Google find all your pages faster)
+# Sitemap location
 Sitemap: https://www.robertchester.co.uk/sitemap.xml
