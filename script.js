@@ -7,7 +7,7 @@ const defaultBooks = [
         "isVisible": true,
         "amazonUrl": "",
         "goodreadsUrl": "",
-        "pdfUrl": "private-downloads/Blood Relatives.pdf",
+        "pdfUrl": "private-downloads/Blood Relatives - Robert Chester.pdf",
         "epubUrl": "private-downloads/Blood Relatives - Robert Chester.epub",
         "pageUrl": "blood-relatives.html",
         "title": "Blood Relatives",
